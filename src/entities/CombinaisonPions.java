@@ -11,6 +11,8 @@ public class CombinaisonPions {
         combinaisonPions = new ArrayList<>(tailleMax);
         this.tailleMax = tailleMax;
     }
+
+    //TRY & CATCH ?
     public Pion getPion(int index){
         if (index < combinaisonPions.size()) {
             Pion result = combinaisonPions.get(index);
@@ -21,6 +23,8 @@ public class CombinaisonPions {
             return null;
         }
     }
+    
+    //TRY & CATCH ?
     public void addPion(Pion p){
         if (combinaisonPions.size() < tailleMax) {
             combinaisonPions.add(p);
