@@ -1,20 +1,21 @@
 package jeu;
 
-import entities.CombinaisonPions;
+import listes.Combinaison;
+import listes.CombinaisonSecrete;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Plateau {
     private final CombinaisonSecrete combinaisonSecrete;
-    private final List<CombinaisonPions> essaisCombinaison;
+    private final List<Combinaison> essaisCombinaison;
 
     public Plateau(CombinaisonSecrete combinaisonSecrete, int nbEssaisMax, int tailleMaxCombinaison){
         this.combinaisonSecrete = combinaisonSecrete;
 
         essaisCombinaison = new ArrayList<>();
         for (int i = 0; i < nbEssaisMax; i++){
-            essaisCombinaison.add(new CombinaisonPions(tailleMaxCombinaison));
+            essaisCombinaison.add(new Combinaison(tailleMaxCombinaison));
         }
     }
 
@@ -22,10 +23,10 @@ public class Plateau {
         return combinaisonSecrete;
     }
 
-    public void setEssai(int index, CombinaisonPions combinaison) {
+    public void setEssai(int index, Combinaison combinaison) {
         essaisCombinaison.set(index, combinaison);
     }
-    public CombinaisonPions getEssai(int index) {
+    public Combinaison getEssai(int index) {
         return essaisCombinaison.get(index);
     }
 
