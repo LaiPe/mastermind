@@ -5,29 +5,28 @@ import entities.Pion;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CombinaisonSecrete extends Combinaison {
+public class CombinaisonSecrete extends Liste<Pion> {
 
     private final List<Boolean> pionsDecouverts;
-    private final int tailleMax;
+
     public CombinaisonSecrete(int tailleMax) {
         super(tailleMax);
         pionsDecouverts = new ArrayList<>(tailleMax);
-        this.tailleMax = tailleMax;
     }
 
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
 
-        for (int i =0;i < super.getTaille();i++){
-            Pion p = super.getPion(i);
+        for (int i = 0; i < super.getTaille(); i++){
+            Pion pion = super.getElement(i);
             if (pionsDecouverts.get(i)){
-                result.append(p.toString());
-            } else{
+                result.append(pion.toString());
+            } else {
                 result.append('-');
             }
         }
-        for (int i = super.getTaille() ; i < tailleMax ; i++){
+        for (int i = super.getTaille() ; i < super.getTailleMax() ; i++){
             result.append('.');
         }
 
@@ -35,9 +34,9 @@ public class CombinaisonSecrete extends Combinaison {
     }
 
     @Override
-    public void addPion(Pion p) throws IndexOutOfBoundsException{
+    public void addElement(Pion p) throws IndexOutOfBoundsException{
         try{
-            super.addPion(p);
+            super.addElement(p);
             pionsDecouverts.add(Boolean.FALSE);
         } catch (IndexOutOfBoundsException e) {
             throw e;
@@ -51,7 +50,7 @@ public class CombinaisonSecrete extends Combinaison {
         }
 
         for (int i = 0; i < super.getTaille(); i++){
-            if (c.getPion(i).equals(super.getPion(i))){
+            if (c.getElement(i).equals(super.getElement(i))){
                 pionsDecouverts.set(i,Boolean.TRUE);
             }
         }
@@ -66,5 +65,5 @@ public class CombinaisonSecrete extends Combinaison {
         return Boolean.TRUE;
     }
 
-    //SUPPRIMER LA METHODE GETPION (dispensable mais est-ce possible avec un héritage ou alors passer par la délégation)
+    //SUPPRIMER LA METHODE GETELEMENT (dispensable mais est-ce possible avec un héritage ou alors passer par la délégation)
 }
