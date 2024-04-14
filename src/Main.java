@@ -1,7 +1,10 @@
 import entities.Couleur;
 import entities.Pion;
+import entities.Result;
 import listes.Combinaison;
 import listes.CombinaisonSecrete;
+import listes.Liste;
+import listes.TentativeResult;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,33 +17,42 @@ public class Main {
 
         //Test CombinaisonPions
         Combinaison maCombinaison = new Combinaison(6);
-        maCombinaison.addPion(new Pion(Couleur.JAUNE));
-        maCombinaison.addPion(new Pion(Couleur.MAGENTA));
-        maCombinaison.addPion(new Pion(Couleur.VERT));
+        maCombinaison.addElement(new Pion(Couleur.JAUNE));
+        maCombinaison.addElement(new Pion(Couleur.MAGENTA));
+        maCombinaison.addElement(new Pion(Couleur.VERT));
         System.out.println(maCombinaison);
-        System.out.println(maCombinaison.getPion(2));
+        System.out.println(maCombinaison.getElement(2));
 
         //Test CombinaisonSecrete
         CombinaisonSecrete maCombinaisonSecrete = new CombinaisonSecrete(5);
-        maCombinaisonSecrete.addPion(new Pion(Couleur.BLEU));
-        maCombinaisonSecrete.addPion(new Pion(Couleur.NOIR));
-        maCombinaisonSecrete.addPion(new Pion(Couleur.JAUNE));
-        maCombinaisonSecrete.addPion(new Pion(Couleur.MAGENTA));
-        maCombinaisonSecrete.addPion(new Pion(Couleur.VERT));
+        maCombinaisonSecrete.addElement(new Pion(Couleur.BLEU));
+        maCombinaisonSecrete.addElement(new Pion(Couleur.NOIR));
+        maCombinaisonSecrete.addElement(new Pion(Couleur.JAUNE));
+        maCombinaisonSecrete.addElement(new Pion(Couleur.MAGENTA));
+        maCombinaisonSecrete.addElement(new Pion(Couleur.VERT));
         System.out.println(maCombinaisonSecrete);
         System.out.println(maCombinaisonSecrete.decouverte());
 
         Combinaison monEssai = new Combinaison(5);
-        monEssai.addPion(new Pion(Couleur.BLEU));
-        monEssai.addPion(new Pion(Couleur.NOIR));
-        monEssai.addPion(new Pion(Couleur.MAGENTA));
-        monEssai.addPion(new Pion(Couleur.JAUNE));
-        monEssai.addPion(new Pion(Couleur.VERT));
+        monEssai.addElement(new Pion(Couleur.BLEU));
+        monEssai.addElement(new Pion(Couleur.NOIR));
+        monEssai.addElement(new Pion(Couleur.MAGENTA));
+        monEssai.addElement(new Pion(Couleur.JAUNE));
+        monEssai.addElement(new Pion(Couleur.VERT));
         System.out.println(monEssai);
 
         maCombinaisonSecrete.compare(monEssai);
         System.out.println(maCombinaisonSecrete);
         System.out.println(maCombinaisonSecrete.decouverte());
+
+
+        //Test TentativeEssai
+        TentativeResult monResultatdeTentative = new TentativeResult(3);
+        monResultatdeTentative.addElement(Result.VALIDE);
+        monResultatdeTentative.addElement(Result.COULEUR);
+        monResultatdeTentative.addElement(Result.INVALIDE);
+        System.out.println(monResultatdeTentative);
+
 
     }
 }
