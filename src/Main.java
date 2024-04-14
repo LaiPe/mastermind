@@ -51,7 +51,9 @@ public class Main {
         monEssai.addElement(new Pion(Couleur.VERT));
         System.out.println(monEssai);
 
-        System.out.println(maCombinaisonSecrete.compare(monEssai));
+        TentativeResult monResultat = maCombinaisonSecrete.compare(monEssai);
+        System.out.println(monResultat);
+        System.out.println(monResultat.description());
         System.out.println(maCombinaisonSecrete);
         System.out.println(maCombinaisonSecrete.decouverte());
     }
