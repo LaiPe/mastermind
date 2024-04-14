@@ -1,6 +1,7 @@
 package listes;
 
 import entities.Pion;
+import entities.Result;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,17 +44,34 @@ public class CombinaisonSecrete extends Liste<Pion> {
         }
     }
 
+    //J'ai eu besoin de la methode contains mais elle n'est plus accessible car Liste<> n'étends pas List<>.
+    private Boolean contains(Pion pionCherche){
+        for(int i = 0; i < getTaille(); i++){
+            if(getElement(i).getCouleurPion() == pionCherche.getCouleurPion()){
+                 return Boolean.TRUE;
+            }
+        }
+        return Boolean.FALSE;
+    }
+    public TentativeResult compare(Combinaison c) throws IndexOutOfBoundsException{
+        TentativeResult result = new TentativeResult(getTailleMax());
 
-    public void compare(Combinaison c) throws IndexOutOfBoundsException{
-        if (c.getTaille() != super.getTaille()){
+        if (c.getTaille() != getTaille()){
             throw new IndexOutOfBoundsException();
         }
 
-        for (int i = 0; i < super.getTaille(); i++){
-            if (c.getElement(i).equals(super.getElement(i))){
+        for (int i = 0; i < c.getTaille(); i++){
+            if (c.getElement(i).equals(getElement(i))){
                 pionsDecouverts.set(i,Boolean.TRUE);
+                result.addElement(Result.VALIDE);
+            } else if (contains(c.getElement(i))){
+                result.addElement(Result.COULEUR);
+            }
+            else {
+                result.addElement(Result.INVALIDE);
             }
         }
+        return result;
     }
 
     public Boolean decouverte(){
