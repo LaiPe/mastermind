@@ -3,20 +3,10 @@ import entities.Pion;
 import entities.Result;
 import listes.Combinaison;
 import listes.CombinaisonSecrete;
-import listes.Liste;
 import listes.TentativeResult;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Main {
+public class ListesTest {
     public static void main(String[] args) {
-        //Test Couleur
-        System.out.println(Couleur.VERT.getCodeANSI()+"C'est tout bon chef !");
-
-        //Test Pion
-        Pion monPion = new Pion(Couleur.BLEU);
-        System.out.println(monPion);
 
         //Test CombinaisonPions
         Combinaison maCombinaison = new Combinaison(6);
