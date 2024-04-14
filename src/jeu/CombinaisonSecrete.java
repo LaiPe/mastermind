@@ -8,8 +8,8 @@ import java.util.List;
 
 public class CombinaisonSecrete extends CombinaisonPions {
 
-    private List<Boolean> pionsDecouverts;
-    private int tailleMax;
+    private final List<Boolean> pionsDecouverts;
+    private final int tailleMax;
     public CombinaisonSecrete(int tailleMax) {
         super(tailleMax);
         pionsDecouverts = new ArrayList<>(tailleMax);

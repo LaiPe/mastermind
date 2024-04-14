@@ -4,18 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CombinaisonPions {
-    private List<Pion> combinaisonPions;
-    private int tailleMax;
+    private final List<Pion> combinaisonPions;
+    private final int tailleMax;
 
     public CombinaisonPions(int tailleMax){
         combinaisonPions = new ArrayList<>(tailleMax);
         this.tailleMax = tailleMax;
     }
-    
+
     public Pion getPion(int index) throws IndexOutOfBoundsException{
         if (index < combinaisonPions.size()) {
-            Pion result = combinaisonPions.get(index);
-            return result;
+            return combinaisonPions.get(index);
         }
         else {
             System.err.println("Index invalide !");

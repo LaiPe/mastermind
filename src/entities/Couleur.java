@@ -10,9 +10,9 @@ public enum Couleur {
     CYAN(7,"Cyan","\u001B[36m"),
     BLANC(8,"Blanc","\u001B[37m");
 
-    private int index;
-    private String nom;
-    private String codeANSI;
+    private final int index;
+    private final String nom;
+    private final String codeANSI;
 
     Couleur(int index, String nom, String codeANSI){
         this.index = index;

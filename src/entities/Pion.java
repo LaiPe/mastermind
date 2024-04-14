@@ -1,7 +1,7 @@
 package entities;
 
 public class Pion {
-    private Couleur couleurPion;
+    private final Couleur couleurPion;
 
     public Pion (Couleur couleurPion){
         this.couleurPion = couleurPion;
