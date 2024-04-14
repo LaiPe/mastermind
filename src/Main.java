@@ -1,8 +1,7 @@
 import entities.Couleur;
-
 import entities.Pion;
-import entities.CombinaisonPions;
-import jeu.CombinaisonSecrete;
+import listes.Combinaison;
+import listes.CombinaisonSecrete;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,7 +13,7 @@ public class Main {
         System.out.println(monPion);
 
         //Test CombinaisonPions
-        CombinaisonPions maCombinaison = new CombinaisonPions(6);
+        Combinaison maCombinaison = new Combinaison(6);
         maCombinaison.addPion(new Pion(Couleur.JAUNE));
         maCombinaison.addPion(new Pion(Couleur.MAGENTA));
         maCombinaison.addPion(new Pion(Couleur.VERT));
@@ -22,19 +21,26 @@ public class Main {
         System.out.println(maCombinaison.getPion(2));
 
         //Test CombinaisonSecrete
-        CombinaisonSecrete maCombinaisonSecrete = new CombinaisonSecrete(2);
+        CombinaisonSecrete maCombinaisonSecrete = new CombinaisonSecrete(5);
         maCombinaisonSecrete.addPion(new Pion(Couleur.BLEU));
         maCombinaisonSecrete.addPion(new Pion(Couleur.NOIR));
+        maCombinaisonSecrete.addPion(new Pion(Couleur.JAUNE));
+        maCombinaisonSecrete.addPion(new Pion(Couleur.MAGENTA));
+        maCombinaisonSecrete.addPion(new Pion(Couleur.VERT));
         System.out.println(maCombinaisonSecrete);
         System.out.println(maCombinaisonSecrete.decouverte());
 
-        CombinaisonPions monEssai = new CombinaisonPions(2);
+        Combinaison monEssai = new Combinaison(5);
         monEssai.addPion(new Pion(Couleur.BLEU));
         monEssai.addPion(new Pion(Couleur.NOIR));
+        monEssai.addPion(new Pion(Couleur.MAGENTA));
+        monEssai.addPion(new Pion(Couleur.JAUNE));
+        monEssai.addPion(new Pion(Couleur.VERT));
         System.out.println(monEssai);
 
         maCombinaisonSecrete.compare(monEssai);
         System.out.println(maCombinaisonSecrete);
         System.out.println(maCombinaisonSecrete.decouverte());
+
     }
 }
