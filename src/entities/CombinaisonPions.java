@@ -11,25 +11,24 @@ public class CombinaisonPions {
         combinaisonPions = new ArrayList<>(tailleMax);
         this.tailleMax = tailleMax;
     }
-
-    //TRY & CATCH ?
-    public Pion getPion(int index){
+    
+    public Pion getPion(int index) throws IndexOutOfBoundsException{
         if (index < combinaisonPions.size()) {
             Pion result = combinaisonPions.get(index);
             return result;
         }
         else {
             System.err.println("Index invalide !");
-            return null;
+            throw new IndexOutOfBoundsException();
         }
     }
-    
-    //TRY & CATCH ?
-    public void addPion(Pion p){
+
+    public void addPion(Pion p) throws IndexOutOfBoundsException{
         if (combinaisonPions.size() < tailleMax) {
             combinaisonPions.add(p);
         } else {
             System.err.println("Combinaison pleine !");
+            throw new IndexOutOfBoundsException();
         }
     }
     public int getTaille(){
