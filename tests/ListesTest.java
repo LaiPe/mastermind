@@ -25,7 +25,7 @@ public class ListesTest {
 
         //Test CombinaisonSecrete
         CombinaisonSecrete maCombinaisonSecrete = new CombinaisonSecrete(5);
-        maCombinaisonSecrete.addElement(new Pion(Couleur.BLEU));
+        maCombinaisonSecrete.addElement(new Pion(Couleur.JAUNE));
         maCombinaisonSecrete.addElement(new Pion(Couleur.NOIR));
         maCombinaisonSecrete.addElement(new Pion(Couleur.JAUNE));
         maCombinaisonSecrete.addElement(new Pion(Couleur.MAGENTA));
@@ -35,10 +35,10 @@ public class ListesTest {
 
         Combinaison monEssai = new Combinaison(5);
         monEssai.addElement(new Pion(Couleur.BLEU));
-        monEssai.addElement(new Pion(Couleur.NOIR));
+        monEssai.addElement(new Pion(Couleur.JAUNE));
         monEssai.addElement(new Pion(Couleur.MAGENTA));
-        monEssai.addElement(new Pion(Couleur.ROUGE));
-        monEssai.addElement(new Pion(Couleur.VERT));
+        monEssai.addElement(new Pion(Couleur.JAUNE));
+        monEssai.addElement(new Pion(Couleur.JAUNE));
         System.out.println(monEssai);
 
         TentativeResult monResultat = maCombinaisonSecrete.compare(monEssai);
