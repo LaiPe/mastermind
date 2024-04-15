@@ -18,7 +18,7 @@ public enum Couleur {
         this.codeANSI = codeANSI;
     }
 
-    public Couleur getByIndex(int index) {
+    public static Couleur getByIndex(int index) {
         for (Couleur couleur : Couleur.values()) {
             if (couleur.index == index) {
                 return couleur;
