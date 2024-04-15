@@ -13,7 +13,7 @@ public class Pion {
 
     @Override
     public String toString() {
-        return couleurPion.getCodeANSI()+"O"+Couleur.BLANC.getCodeANSI();
+        return couleurPion+"O"+Couleur.BLANC;
     }
 
     @Override

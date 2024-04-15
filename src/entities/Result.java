@@ -1,11 +1,11 @@
 package entities;
 
 public enum Result {
-    VALIDE(Couleur.VERT.getCodeANSI() + '\u2713' + Couleur.BLANC.getCodeANSI()),
-    COULEUR(Couleur.MAGENTA.getCodeANSI() + '\u2248' + Couleur.BLANC.getCodeANSI()),
-    INVALIDE(Couleur.ROUGE.getCodeANSI() + '\u2717' + Couleur.BLANC.getCodeANSI());
+    VALIDE(Couleur.VERT + "\u2713" + Couleur.BLANC),
+    COULEUR(Couleur.MAGENTA + "\u2248" + Couleur.BLANC),
+    INVALIDE(Couleur.ROUGE + "\u2717" + Couleur.BLANC);
 
-    String string;
+    private final String string;
     Result(String string){
         this.string = string;
     }
