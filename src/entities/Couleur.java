@@ -8,7 +8,8 @@ public enum Couleur {
     BLEU(5, "\u001B[34m"),
     MAGENTA(6, "\u001B[35m"),
     CYAN(7, "\u001B[36m"),
-    BLANC(8, "\u001B[37m");
+    BLANC(8, "\u001B[97m"),
+    RESET(9, "\u001B[0m");
 
     private final int index;
     private final String codeANSI;

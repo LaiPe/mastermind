@@ -13,7 +13,7 @@ public class Pion {
 
     @Override
     public String toString() {
-        return couleurPion+"O"+Couleur.BLANC;
+        return couleurPion+"O"+Couleur.RESET;
     }
 
     @Override
