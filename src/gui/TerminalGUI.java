@@ -2,12 +2,17 @@ package gui;
 
 import jeu.Plateau;
 
-import java.awt.Toolkit;
-import java.awt.Dimension;
 import java.io.IOException;
 
 public class TerminalGUI {
-    public static void afficherPlateau(Plateau plateau){
+    private boolean affichageTexte;
+
+    public TerminalGUI(boolean affichageTexte){
+        this.affichageTexte = affichageTexte;
+    }
+
+    public void afficherPlateau(Plateau plateau){
+
         System.out.println();
 
         System.out.println("======== Combinaison Secrète =========");
@@ -16,9 +21,14 @@ public class TerminalGUI {
 
         System.out.println("=============== Essais ===============");
         for (int i = 0; i < plateau.getNbEssaisMax(); i++) {
-            if (plateau.getResultEssai(i).getTaille() > 0) {
+            if (plateau.getResultEssai(i).getTaille() > 0 && affichageTexte) {
+                System.out.println(plateau.getCombinaisonEssai(i));
+                System.out.println("==> " + plateau.getResultEssai(i).description());
+            }
+            else if (plateau.getResultEssai(i).getTaille() > 0) {
                 System.out.println(plateau.getCombinaisonEssai(i) + " ==> " + plateau.getResultEssai(i));
-            } else {
+            }
+            else {
                 System.out.println(plateau.getCombinaisonEssai(i));
             }
         }

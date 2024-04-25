@@ -31,7 +31,7 @@ public class TentativeResult extends Liste<Result>{
             }
         }
 
-        return "Dans votre tentative, " +
+        return "Dans cette tentative, " +
                 accordPionDescription(valide) +
                 "de la bonne couleur et au bon endroit, et " +
                 accordPionDescription(couleur) +
