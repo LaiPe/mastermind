@@ -1,11 +1,9 @@
 package jeu;
 
-import entities.Result;
 import listes.Combinaison;
 import listes.CombinaisonSecrete;
 import listes.TentativeResult;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 

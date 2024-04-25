@@ -12,12 +12,10 @@ public class TerminalGUI {
     }
 
     public void afficherPlateau(Plateau plateau){
-
-        System.out.println();
+        System.out.println("\033[H\033[2J");
 
         System.out.println("======== Combinaison Secrète =========");
         System.out.println(plateau.getCombinaisonSecrete());
-        System.out.println();
 
         System.out.println("=============== Essais ===============");
         for (int i = 0; i < plateau.getNbEssaisMax(); i++) {
@@ -34,6 +32,5 @@ public class TerminalGUI {
         }
 
         System.out.println();
-
     }
 }
