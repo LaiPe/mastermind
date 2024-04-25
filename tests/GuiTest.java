@@ -8,6 +8,7 @@ import listes.CombinaisonSecrete;
 public class GuiTest {
     public static void main(String[] args) {
         int tailleMax = 4;
+        TerminalGUI gui = new TerminalGUI(false);
 
         CombinaisonSecrete cs = new CombinaisonSecrete(tailleMax);
         cs.addElement(new Pion(Couleur.ROUGE));
@@ -16,7 +17,7 @@ public class GuiTest {
         cs.addElement(new Pion(Couleur.VERT));
 
         Plateau plateau = new Plateau(cs,8,tailleMax);
-        TerminalGUI.afficherPlateau(plateau);
+        gui.afficherPlateau(plateau);
 
         Combinaison essai1 = new Combinaison(tailleMax);
         essai1.addElement(new Pion(Couleur.BLEU));
@@ -26,7 +27,7 @@ public class GuiTest {
 
         plateau.setEssai(0,essai1);
 
-        TerminalGUI.afficherPlateau(plateau);
+        gui.afficherPlateau(plateau);
 
     }
 }
