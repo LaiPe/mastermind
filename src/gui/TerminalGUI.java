@@ -52,7 +52,7 @@ public class TerminalGUI implements GUI {
         Combinaison result = new Combinaison(tailleMax);
         for (int i = 0; i < response.length(); i++){
             int indexCouleur = Character.getNumericValue(response.charAt(i))-1;
-            if (indexCouleur > couleursAutorisees.size()){
+            if (indexCouleur + 1 > couleursAutorisees.size()){
                 throw new IllegalArgumentException("Le " + (i+1) +"-ème chiffre de la combinaison est supérieur à 8 !");
             }
             result.addElement(new Pion(couleursAutorisees.get(indexCouleur)));
@@ -70,11 +70,11 @@ public class TerminalGUI implements GUI {
                 System.out.print((i+1) + " pour " + couleursAutorisees.get(i) + couleursAutorisees.get(i).getNom() + Couleur.RESET + "; ");
             }
             Combinaison exemple = new Combinaison(4);
-            exemple.addElement(new Pion(Couleur.getByIndex(4)));
-            exemple.addElement(new Pion(Couleur.getByIndex(5)));
-            exemple.addElement(new Pion(Couleur.getByIndex(1)));
-            exemple.addElement(new Pion(Couleur.getByIndex(2)));
-            System.out.println("\nExemple : 4512 correspond à la combinaison " + exemple);
+            exemple.addElement(new Pion(couleursAutorisees.get(0)));
+            exemple.addElement(new Pion(couleursAutorisees.get(1)));
+            exemple.addElement(new Pion(couleursAutorisees.get(2)));
+            exemple.addElement(new Pion(couleursAutorisees.get(3)));
+            System.out.println("\nExemple : 1234 correspond à la combinaison " + exemple);
 
 
             String res = reader.readLine();
