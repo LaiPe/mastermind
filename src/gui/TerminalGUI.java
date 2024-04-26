@@ -8,9 +8,10 @@ import listes.Combinaison;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 public class TerminalGUI implements GUI {
-    private boolean affichageTexte;
+    private final boolean affichageTexte;
 
     public TerminalGUI(boolean affichageTexte){
         this.affichageTexte = affichageTexte;
@@ -43,30 +44,30 @@ public class TerminalGUI implements GUI {
         System.out.println();
     }
 
-    private Combinaison parse(String response, int tailleMax) throws IllegalArgumentException{
+    private Combinaison parse(String response, int tailleMax, List<Couleur> couleursAutorisees) throws IllegalArgumentException{
         if (response.length() > tailleMax){
             throw new IllegalArgumentException("La combinaison rentrée est trop longue !");
         }
 
         Combinaison result = new Combinaison(tailleMax);
         for (int i = 0; i < response.length(); i++){
-            int indexCouleur = Character.getNumericValue(response.charAt(i));
-            if (indexCouleur > 8){
+            int indexCouleur = Character.getNumericValue(response.charAt(i))-1;
+            if (indexCouleur > couleursAutorisees.size()){
                 throw new IllegalArgumentException("Le " + (i+1) +"-ème chiffre de la combinaison est supérieur à 8 !");
             }
-            result.addElement(new Pion(Couleur.getByIndex(indexCouleur)));
+            result.addElement(new Pion(couleursAutorisees.get(indexCouleur)));
         }
         return result;
     }
     @Override
-    public Combinaison choixCombinaison(int tailleMax) {
+    public Combinaison choixCombinaison(int tailleMax, List<Couleur> couleursAutorisees) {
+
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         try {
             System.out.println("Veuillez rentrer la combinaison de chiffres correspondant aux couleurs que vous désirez pour votre essai.");
-            for (int i = 1; i < 9; i++){
-                Couleur c = Couleur.getByIndex(i);
-                System.out.print(i + " pour " + c + c.getNom() + Couleur.RESET + "; ");
+            for (int i = 0; i < couleursAutorisees.size(); i++){
+                System.out.print((i+1) + " pour " + couleursAutorisees.get(i) + couleursAutorisees.get(i).getNom() + Couleur.RESET + "; ");
             }
             Combinaison exemple = new Combinaison(4);
             exemple.addElement(new Pion(Couleur.getByIndex(4)));
@@ -78,7 +79,7 @@ public class TerminalGUI implements GUI {
 
             String res = reader.readLine();
 
-            return parse(res, tailleMax);
+            return parse(res, tailleMax, couleursAutorisees);
 
         } catch (IOException e){
             e.printStackTrace();

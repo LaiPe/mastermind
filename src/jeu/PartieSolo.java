@@ -17,6 +17,7 @@ public class PartieSolo {
 
     GUI gui;
 
+
     private List<Couleur> selecRandCouleurs(int nbCouleur){
         List<Couleur> couleurs = new ArrayList<>(8);
         for (int i = 1; i < 9; i++){
@@ -85,9 +86,9 @@ public class PartieSolo {
         gui.afficherPlateau(plateau);
 
         //Création de la combinaison de l'essai du tour
-        Combinaison essai = gui.choixCombinaison(plateau.getTailleMaxCombinaison());
+        Combinaison essai = gui.choixCombinaison(plateau.getTailleMaxCombinaison(), couleurAutorisees);
         while (essai == null){
-            essai = gui.choixCombinaison(plateau.getTailleMaxCombinaison());
+            essai = gui.choixCombinaison(plateau.getTailleMaxCombinaison(), couleurAutorisees);
         }
 
         //Placement de l'essai dans le plateau

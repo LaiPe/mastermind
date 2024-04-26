@@ -17,7 +17,7 @@ public class Main {
             String res = reader.readLine();
             switch (res) {
                 case "1":
-                    PartieSolo partieSolo = new PartieSolo(10,4,6,false , new TerminalGUI(false));
+                    PartieSolo partieSolo = new PartieSolo(10,4,6,false, new TerminalGUI(false));
                     partieSolo.launchPartie();
             }
         } catch (IOException e) {
