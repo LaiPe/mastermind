@@ -10,7 +10,7 @@ import java.util.List;
 
 public class CombinaisonSecrete extends Liste<Pion> {
 
-    private final List<Boolean> pionsDecouverts;
+    private List<Boolean> pionsDecouverts;
 
     public CombinaisonSecrete(int tailleMax) {
         super(tailleMax);
@@ -95,6 +95,8 @@ public class CombinaisonSecrete extends Liste<Pion> {
         TentativeResult result = new TentativeResult(getTailleMax());
         HashMap<Couleur, Integer> cptCouleurs = initCptCouleurs();
 
+        List<Boolean> pionsDecourvertsCompare = new ArrayList<>();
+
         if (c.getTaille() != getTaille()){
             throw new IndexOutOfBoundsException();
         }
@@ -104,18 +106,21 @@ public class CombinaisonSecrete extends Liste<Pion> {
             Pion pionSecret = getElement(i);
 
             if (pionTentative.equals(pionSecret)){
-                pionsDecouverts.set(i,Boolean.TRUE);
+                pionsDecourvertsCompare.add(Boolean.TRUE);
                 addCptCouleur(cptCouleurs,pionTentative,1);
                 result.addElement(Result.VALIDE);
             }
             else if (contains(pionTentative,cptCouleurs)){
+                pionsDecourvertsCompare.add(Boolean.FALSE);
                 addCptCouleur(cptCouleurs,pionTentative,1);
                 result.addElement(Result.COULEUR);
             }
             else {
+                pionsDecourvertsCompare.add(Boolean.FALSE);
                 result.addElement(Result.INVALIDE);
             }
         }
+        pionsDecouverts = pionsDecourvertsCompare;
         return result;
     }
 
