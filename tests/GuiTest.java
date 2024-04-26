@@ -25,9 +25,9 @@ public class GuiTest {
         essai1.addElement(new Pion(Couleur.ROUGE));
         essai1.addElement(new Pion(Couleur.VERT));
 
-        plateau.setEssai(0,essai1);
+        plateau.addEssai(essai1);
 
         gui.afficherPlateau(plateau);
-
+        
     }
 }

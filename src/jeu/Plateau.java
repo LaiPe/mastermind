@@ -18,22 +18,16 @@ public class Plateau {
 
         this.nbEssaisMax = nbEssaisMax;
         essaisCombinaison = new ArrayList<>();
-        for (int i = 0; i < nbEssaisMax; i++){
-            essaisCombinaison.add(new Combinaison(tailleMaxCombinaison));
-        }
         essaisResult = new ArrayList<>();
-        for (int i = 0; i < nbEssaisMax; i++){
-            essaisResult.add(new TentativeResult(tailleMaxCombinaison));
-        }
     }
 
     public CombinaisonSecrete getCombinaisonSecrete() {
         return combinaisonSecrete;
     }
 
-    public void setEssai(int index, Combinaison essai) {
-        essaisCombinaison.set(index, essai);
-        essaisResult.add(index, combinaisonSecrete.compare(essai));
+    public void addEssai(Combinaison essai) {
+        essaisCombinaison.add(essai);
+        essaisResult.add(combinaisonSecrete.compare(essai));
     }
     public Combinaison getCombinaisonEssai(int index) {
         return essaisCombinaison.get(index);
