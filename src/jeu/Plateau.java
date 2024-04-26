@@ -12,11 +12,14 @@ public class Plateau {
     private final List<Combinaison> essaisCombinaison;
     private final List<TentativeResult> essaisResult;
     private final int nbEssaisMax;
+    private final int tailleMaxCombinaison;
 
     public Plateau(CombinaisonSecrete combinaisonSecrete, int nbEssaisMax, int tailleMaxCombinaison){
         this.combinaisonSecrete = combinaisonSecrete;
 
         this.nbEssaisMax = nbEssaisMax;
+        this.tailleMaxCombinaison = tailleMaxCombinaison;
+
         essaisCombinaison = new ArrayList<>();
         essaisResult = new ArrayList<>();
     }
@@ -38,5 +41,17 @@ public class Plateau {
 
     public int getNbEssaisMax() {
         return nbEssaisMax;
+    }
+
+    public int getNbEssais() {
+        return essaisCombinaison.size();
+    }
+
+    public boolean estPlein(){
+        return essaisCombinaison.size() == nbEssaisMax;
+    }
+
+    public int getTailleMaxCombinaison() {
+        return tailleMaxCombinaison;
     }
 }
