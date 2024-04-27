@@ -13,6 +13,9 @@ public abstract class RuleBoolean implements Rule{
             throw new IllegalArgumentException(message);
         }
     }
+    public RuleBoolean(boolean value) {
+        this.value = value;
+    }
 
     public Boolean getValue() {
         return value;
