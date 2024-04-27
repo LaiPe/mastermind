@@ -2,6 +2,6 @@ package rules;
 
 public interface Rule {
     Object getValue();
-    void setValue(Object value);
+    void setValue(String value);
     String getDemande();
 }

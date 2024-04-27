@@ -6,7 +6,7 @@ import java.util.List;
 public class RulesTest {
     public static void main(String[] args) {
         TailleMaxCombinaison t = new TailleMaxCombinaison();
-        t.setValue(4);
+        t.setValue("4");
         System.out.println(t.getValue());
 
         AffichageTexte a = new AffichageTexte();

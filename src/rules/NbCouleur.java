@@ -10,8 +10,8 @@ public class NbCouleur extends RuleInteger implements Rule {
     }
 
     @Override
-    public void setValue(Object value){
-        int v = (int) value;
+    public void setValue(String value){
+        int v = Integer.parseInt(value);
         super.setValue(v, (v < 6 || v > 8));
     }
 

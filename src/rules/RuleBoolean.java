@@ -19,9 +19,6 @@ public abstract class RuleBoolean{
             throw new IllegalArgumentException(reponseErr);
         }
     }
-    public void setValue(Object value) {
-        this.value = (boolean) value;
-    }
 
     public Boolean getValue() {
         return value;
