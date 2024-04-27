@@ -1,11 +1,12 @@
-
+import gui.GUI;
 import gui.TerminalGUI;
 import jeu.PartieSolo;
-
+import listes.RulesList;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -17,17 +18,15 @@ public class Main {
             String res = reader.readLine();
             switch (res) {
                 case "1":
-                    PartieSolo partieSolo = new PartieSolo(10,4,6,false, new TerminalGUI(false));
+                    RulesList rules = GUI.choixRules();
+
+                    GUI gui = new TerminalGUI((boolean) rules.getElement(4).getValue());
+
+                    PartieSolo partieSolo = new PartieSolo(rules,gui);
                     partieSolo.launchPartie();
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                reader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 }
