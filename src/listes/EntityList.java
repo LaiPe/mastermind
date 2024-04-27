@@ -1,9 +1,9 @@
 package listes;
 
 
-public abstract class EntityListe<T> extends CapedList<T>{
+public abstract class EntityList<T> extends CapedList<T>{
 
-    public EntityListe(int tailleMax){
+    public EntityList(int tailleMax){
         super(tailleMax);
     }
 

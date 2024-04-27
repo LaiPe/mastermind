@@ -2,7 +2,7 @@ package listes;
 
 import entities.Result;
 
-public class TentativeResult extends EntityListe<Result> {
+public class TentativeResult extends EntityList<Result> {
     public TentativeResult(int tailleMax) {
         super(tailleMax);
     }
