@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class CombinaisonSecrete extends Liste<Pion> {
+public class CombinaisonSecrete extends EntityListe<Pion> {
 
     private List<Boolean> pionsDecouverts;
 
