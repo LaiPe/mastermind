@@ -57,17 +57,6 @@ public class PartieSolo {
     }
     public PartieSolo(int nbEssaisMax, int tailleMaxCombinaison, int nbCouleur, boolean plsFoisMemeCouleur, GUI gui) throws IllegalArgumentException{
 
-        //Vérification des arguments
-        if ( nbCouleur < 6 || nbCouleur > 8){
-            throw new IllegalArgumentException("Le nombre de couleur doit être compris entre 6 et 8.");
-        }
-        if (tailleMaxCombinaison < 4 || tailleMaxCombinaison > 5) {
-            throw new IllegalArgumentException("Le nombre de pions doit être de 4 ou 5.");
-        }
-        if (!(nbEssaisMax == 10 || nbEssaisMax == 12)) {
-            throw new IllegalArgumentException("Le nombre d'essais doit être de 10 ou 12.");
-        }
-
         //Selection aléatoire des couleurs
         couleurAutorisees = selecRandCouleurs(nbCouleur);
 
