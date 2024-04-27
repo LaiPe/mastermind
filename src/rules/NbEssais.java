@@ -1,10 +1,10 @@
 package rules;
 
 public class NbEssais extends RuleInteger implements Rule {
-    private final static String message = "Le nombre d'essais doit être de 10 ou 12.";
+    private final static String reponseErr = "Le nombre d'essais doit être de 10 ou 12.";
 
     public NbEssais() {
-        super(message);
+        super(reponseErr);
     }
     public void setValue(Object value){
         int v = (int) value;

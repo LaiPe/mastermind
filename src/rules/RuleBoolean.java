@@ -2,7 +2,7 @@ package rules;
 
 public abstract class RuleBoolean{
     private boolean value;
-    private final static String message = "Veuillez entrer un caractère valide !";
+    private final static String reponseErr = "Veuillez entrer un caractère valide !";
 
     public RuleBoolean() {}
 
@@ -12,7 +12,7 @@ public abstract class RuleBoolean{
         } else if (key.equals("N") || key.equals("n")) {
             value = false;
         } else {
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException(reponseErr);
         }
     }
     public void setValue(Object value) {

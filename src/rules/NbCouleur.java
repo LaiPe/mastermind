@@ -1,10 +1,10 @@
 package rules;
 
 public class NbCouleur extends RuleInteger implements Rule {
-    private final static String message = "Le nombre de couleur doit être compris entre 6 et 8.";
+    private final static String reponseErr = "Le nombre de couleur doit être compris entre 6 et 8.";
 
     public NbCouleur() {
-        super(message);
+        super(reponseErr);
     }
     public void setValue(Object value){
         int v = (int) value;

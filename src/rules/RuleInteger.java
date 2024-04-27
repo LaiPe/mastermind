@@ -2,15 +2,15 @@ package rules;
 
 public abstract class RuleInteger implements Rule {
     private int value;
-    private final String message;
+    private final String reponseErr;
 
-    public RuleInteger(String message) {
-        this.message = message;
+    public RuleInteger(String reponseErr) {
+        this.reponseErr = reponseErr;
     }
 
     protected void setValue(int value, boolean rule) {
         if (rule){
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException(reponseErr);
         } else {
             this.value = value;
         }
