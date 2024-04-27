@@ -1,6 +1,6 @@
 package rules;
 
-public abstract class RuleInteger {
+public abstract class RuleInteger implements Rule {
     private final int value;
 
     public RuleInteger(int value, boolean rule, String message) {
@@ -11,7 +11,7 @@ public abstract class RuleInteger {
         }
     }
 
-    public int getValue() {
+    public Integer getValue() {
         return value;
     }
 }

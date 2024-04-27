@@ -1,6 +1,6 @@
 package rules;
 
-public abstract class RuleBoolean {
+public abstract class RuleBoolean implements Rule{
     private final boolean value;
     private final static String message = "Veuillez entrer un caractère valide !";
 
@@ -14,7 +14,7 @@ public abstract class RuleBoolean {
         }
     }
 
-    public boolean getValue() {
+    public Boolean getValue() {
         return value;
     }
 }
