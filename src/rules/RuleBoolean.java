@@ -4,7 +4,11 @@ public abstract class RuleBoolean{
     private boolean value;
     private final static String reponseErr = "Veuillez entrer un caractère valide !";
 
-    public RuleBoolean() {}
+    private final String demande;
+
+    public RuleBoolean(String demande) {
+        this.demande = demande;
+    }
 
     public void setValue(String key) {
         if (key.equals("O") || key.equals("o")){
@@ -21,5 +25,9 @@ public abstract class RuleBoolean{
 
     public Boolean getValue() {
         return value;
+    }
+
+    public String getDemande(){
+        return demande + " ('O' pour oui, 'N' pour non)";
     }
 }

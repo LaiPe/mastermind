@@ -12,6 +12,7 @@ public class RulesTest {
         AffichageTexte a = new AffichageTexte();
         a.setValue("O");
         System.out.println(a.getValue());
+        System.out.println(a.getDemande());
 
     }
 }
