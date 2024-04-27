@@ -5,6 +5,8 @@ import entities.Pion;
 import gui.GUI;
 import listes.Combinaison;
 import listes.CombinaisonSecrete;
+import listes.RulesList;
+import rules.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +57,13 @@ public class PartieSolo {
         }
         return csRandom;
     }
-    public PartieSolo(int nbEssaisMax, int tailleMaxCombinaison, int nbCouleur, boolean plsFoisMemeCouleur, GUI gui) throws IllegalArgumentException{
+    public PartieSolo(RulesList rules, GUI gui) {
+
+        int nbEssais = (int) rules.getElement(0).getValue();
+        int tailleMaxCombinaison = (int) rules.getElement(1).getValue();
+        int nbCouleur = (int) rules.getElement(2).getValue();
+        boolean plsFoisMemeCouleur = (boolean) rules.getElement(3).getValue();
+
 
         //Selection aléatoire des couleurs
         couleurAutorisees = selecRandCouleurs(nbCouleur);
@@ -64,7 +72,7 @@ public class PartieSolo {
         CombinaisonSecrete csRandom = genRandCombinaison(plsFoisMemeCouleur,tailleMaxCombinaison,nbCouleur);
 
         //Initialisation du plateau
-        plateau = new Plateau(csRandom,nbEssaisMax,tailleMaxCombinaison);
+        plateau = new Plateau(csRandom,nbEssais,tailleMaxCombinaison);
 
         //Initialisation de la gui
         this.gui = gui;
