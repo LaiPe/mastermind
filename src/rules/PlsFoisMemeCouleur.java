@@ -1,7 +1,7 @@
 package rules;
 
-public class PlsFoisMemeCouleur extends RuleBoolean{
-    public PlsFoisMemeCouleur(String key){
-        super(key);
+public class PlsFoisMemeCouleur extends RuleBoolean implements Rule{
+    public PlsFoisMemeCouleur(){
+        super();
     }
 }

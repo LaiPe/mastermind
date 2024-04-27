@@ -1,10 +1,12 @@
 package rules;
 
-public abstract class RuleBoolean implements Rule{
-    private final boolean value;
+public abstract class RuleBoolean{
+    private boolean value;
     private final static String message = "Veuillez entrer un caractère valide !";
 
-    public RuleBoolean(String key) {
+    public RuleBoolean() {}
+
+    public void setValue(String key) {
         if (key.equals("O") || key.equals("o")){
             value = true;
         } else if (key.equals("N") || key.equals("n")) {
@@ -13,8 +15,8 @@ public abstract class RuleBoolean implements Rule{
             throw new IllegalArgumentException(message);
         }
     }
-    public RuleBoolean(boolean value) {
-        this.value = value;
+    public void setValue(Object value) {
+        this.value = (boolean) value;
     }
 
     public Boolean getValue() {

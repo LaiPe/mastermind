@@ -1,9 +1,14 @@
 package rules;
 
 public abstract class RuleInteger implements Rule {
-    private final int value;
+    private int value;
+    private final String message;
 
-    public RuleInteger(int value, boolean rule, String message) {
+    public RuleInteger(String message) {
+        this.message = message;
+    }
+
+    protected void setValue(int value, boolean rule) {
         if (rule){
             throw new IllegalArgumentException(message);
         } else {

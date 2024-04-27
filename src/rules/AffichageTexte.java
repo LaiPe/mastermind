@@ -1,7 +1,7 @@
 package rules;
 
-public class AffichageTexte extends RuleBoolean{
-    public AffichageTexte(String key){
-        super(key);
+public class AffichageTexte extends RuleBoolean implements Rule{
+    public AffichageTexte(){
+        super();
     }
 }
