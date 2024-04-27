@@ -4,6 +4,8 @@ import entities.Couleur;
 import entities.Pion;
 import jeu.Plateau;
 import listes.Combinaison;
+import listes.RulesList;
+import rules.Rule;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -86,6 +88,13 @@ public class TerminalGUI implements GUI {
         } catch (IllegalArgumentException e){
             System.err.println(e.getMessage());
         }
+        
+        try {
+            reader.close();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
         return null;
     }
 }
