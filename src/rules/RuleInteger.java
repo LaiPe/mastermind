@@ -1,7 +1,7 @@
 package rules;
 
 public abstract class RuleInteger {
-    private int value;
+    private final int value;
 
     public RuleInteger(int value, boolean rule, String message) {
         if (rule){
