@@ -4,8 +4,6 @@ import entities.Couleur;
 import entities.Pion;
 import jeu.Plateau;
 import listes.Combinaison;
-import listes.RulesList;
-import rules.Rule;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -49,13 +47,15 @@ public class TerminalGUI implements GUI {
     private Combinaison parse(String response, int tailleMax, List<Couleur> couleursAutorisees) throws IllegalArgumentException{
         if (response.length() > tailleMax){
             throw new IllegalArgumentException("La combinaison rentrée est trop longue !");
+        } else if (response.length() < tailleMax){
+            throw new IllegalArgumentException("La combinaison rentrée est trop courte !");
         }
 
         Combinaison result = new Combinaison(tailleMax);
         for (int i = 0; i < response.length(); i++){
             int indexCouleur = Character.getNumericValue(response.charAt(i))-1;
             if (indexCouleur + 1 > couleursAutorisees.size()){
-                throw new IllegalArgumentException("Le " + (i+1) +"-ème chiffre de la combinaison est supérieur à 8 !");
+                throw new IllegalArgumentException("Le " + (i+1) +"-ème chiffre de la combinaison est supérieur à " + couleursAutorisees.size() + " !");
             }
             result.addElement(new Pion(couleursAutorisees.get(indexCouleur)));
         }
@@ -87,12 +87,6 @@ public class TerminalGUI implements GUI {
             e.printStackTrace();
         } catch (IllegalArgumentException e){
             System.err.println(e.getMessage());
-        }
-        
-        try {
-            reader.close();
-        } catch (IOException e){
-            e.printStackTrace();
         }
 
         return null;

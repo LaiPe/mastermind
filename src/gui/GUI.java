@@ -37,12 +37,6 @@ public interface GUI {
             }
         }
 
-        try {
-            reader.close();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-        
         return li;
     }
 }
