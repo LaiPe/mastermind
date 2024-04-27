@@ -10,7 +10,7 @@ public class NbEssais extends RuleInteger implements Rule {
     }
 
     @Override
-    public void setValue(String value){
+    public void setValue(String value) throws IllegalArgumentException{
         int v = Integer.parseInt(value);
         super.setValue(v, !(v == 10 || v == 12));
     }

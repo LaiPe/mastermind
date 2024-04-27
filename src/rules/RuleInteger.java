@@ -8,7 +8,7 @@ public abstract class RuleInteger implements Rule {
         this.reponseErr = reponseErr;
     }
 
-    protected void setValue(int value, boolean rule) {
+    protected void setValue(int value, boolean rule) throws IllegalArgumentException{
         if (rule){
             throw new IllegalArgumentException(reponseErr);
         } else {

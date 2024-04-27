@@ -10,7 +10,7 @@ public abstract class RuleBoolean{
         this.demande = demande;
     }
 
-    public void setValue(String key) {
+    public void setValue(String key) throws IllegalArgumentException{
         if (key.equals("O") || key.equals("o")){
             value = true;
         } else if (key.equals("N") || key.equals("n")) {
