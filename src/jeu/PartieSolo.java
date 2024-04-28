@@ -6,8 +6,8 @@ import gui.GUI;
 import gui.TerminalGUI;
 import listes.Combinaison;
 import listes.CombinaisonSecrete;
+import rules.*;
 import rules.map.MapRule;
-import rules.map.MapRulePartieSolo;
 
 
 import java.util.ArrayList;
@@ -84,8 +84,19 @@ public class PartieSolo implements Partie {
         initPartieSolo(rules,gui);
     }
     public PartieSolo() {
-        MapRule rules = GUI.choixRules(new MapRulePartieSolo());
+
+        MapRule rules = new MapRule();
+
+        rules.set("nbEssais", new NbEssais());
+        rules.set("tailleMaxCombinaison", new TailleMaxCombinaison());
+        rules.set("nbCouleur", new NbCouleur());
+        rules.set("plsFoisMemeCouleur", new PlsFoisMemeCouleur());
+        rules.set("affichageTexte", new AffichageTexte());
+
+        GUI.choixRules(rules);
+
         GUI gui = new TerminalGUI((boolean) rules.getValue("affichageTexte"));
+
         initPartieSolo(rules,gui);
     }
 

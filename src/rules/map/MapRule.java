@@ -9,15 +9,22 @@ import java.util.Map;
 import java.util.Set;
 
 
-public abstract class MapRule {
-    protected Map<String, Rule> rulesMap = new HashMap<>();
+public class MapRule {
+    protected Map<String, Rule> rulesMap;
 
-    public void set(String key, String valueRule) throws IllegalArgumentException {
+    public MapRule(){
+        rulesMap = new HashMap<>();
+    }
+
+    public void setValue(String key, String valueRule) throws IllegalArgumentException {
         Rule rule = rulesMap.get(key);
         if (rule == null){
             throw new RuntimeException("Clé '" + key + "' invalide!");
         }
         rule.setValue(valueRule);
+    }
+    public void set(String key, Rule rule) throws IllegalArgumentException {
+        rulesMap.put(key,rule);
     }
 
     public Object getValue(String key){

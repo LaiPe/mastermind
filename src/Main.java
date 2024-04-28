@@ -1,8 +1,4 @@
-import gui.GUI;
-import gui.TerminalGUI;
 import jeu.PartieSolo;
-import rules.map.MapRule;
-import rules.map.MapRulePartieSolo;
 
 import java.io.BufferedReader;
 import java.io.IOException;
