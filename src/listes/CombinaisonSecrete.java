@@ -21,15 +21,15 @@ public class CombinaisonSecrete extends EntityList<Pion> {
     public String toString() {
         StringBuilder result = new StringBuilder();
 
-        for (int i = 0; i < super.getTaille(); i++){
-            Pion pion = super.getElement(i);
+        for (int i = 0; i < getTaille(); i++){
+            Pion pion = getElement(i);
             if (pionsDecouverts.get(i)){
                 result.append(pion.toString());
             } else {
                 result.append('-');
             }
         }
-        for (int i = super.getTaille() ; i < super.getTailleMax() ; i++){
+        for (int i = getTaille() ; i < getTailleMax() ; i++){
             result.append('.');
         }
 
