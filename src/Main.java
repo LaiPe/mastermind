@@ -1,7 +1,8 @@
 import gui.GUI;
 import gui.TerminalGUI;
 import jeu.PartieSolo;
-import listes.RulesList;
+import rules.map.MapRule;
+import rules.map.MapRulePartieSolo;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,9 +19,9 @@ public class Main {
             String res = reader.readLine();
             switch (res) {
                 case "1":
-                    RulesList rules = GUI.choixRules();
+                    MapRule rules = GUI.choixRules(new MapRulePartieSolo());
 
-                    GUI gui = new TerminalGUI((boolean) rules.getElement(4).getValue());
+                    GUI gui = new TerminalGUI((boolean) rules.getValue("affichageTexte"));
 
                     PartieSolo partieSolo = new PartieSolo(rules,gui);
                     partieSolo.launchPartie();

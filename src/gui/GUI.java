@@ -5,23 +5,24 @@ import jeu.Plateau;
 import listes.Combinaison;
 import listes.RulesList;
 import rules.Rule;
+import rules.map.MapRule;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface GUI {
     void afficherPlateau(Plateau plateau);
 
     Combinaison choixCombinaison(int tailleMax, List<Couleur> couleursAutorisees);
 
-    static RulesList choixRules(){
-        RulesList li = new RulesList();
+    static MapRule choixRules(MapRule rules){
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        for(int i = 0; i < li.getTaille(); i++){
-            Rule rule = li.getElement(i);
+        for(Rule rule : rules.allRules()){
             boolean validRes = false;
             while (!validRes) {
                 System.out.print(rule.getDemande() + " : ");
@@ -37,6 +38,6 @@ public interface GUI {
             }
         }
 
-        return li;
+        return rules;
     }
 }

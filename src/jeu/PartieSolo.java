@@ -5,7 +5,8 @@ import entities.Pion;
 import gui.GUI;
 import listes.Combinaison;
 import listes.CombinaisonSecrete;
-import listes.RulesList;
+import rules.map.MapRule;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,12 +57,12 @@ public class PartieSolo implements Partie {
         }
         return csRandom;
     }
-    public PartieSolo(RulesList rules, GUI gui) {
+    public PartieSolo(MapRule rules, GUI gui) {
 
-        int nbEssais = (int) rules.getElement(0).getValue();
-        int tailleMaxCombinaison = (int) rules.getElement(1).getValue();
-        int nbCouleur = (int) rules.getElement(2).getValue();
-        boolean plsFoisMemeCouleur = (boolean) rules.getElement(3).getValue();
+        int nbEssais = (int) rules.getValue("nbEssais");
+        int tailleMaxCombinaison = (int) rules.getValue("tailleMaxCombinaison");
+        int nbCouleur = (int) rules.getValue("nbCouleur");
+        boolean plsFoisMemeCouleur = (boolean) rules.getValue("plsFoisMemeCouleur");
 
 
         //Selection aléatoire des couleurs
