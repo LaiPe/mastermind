@@ -4,7 +4,9 @@ package rules.map;
 import rules.*;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 
 public abstract class MapRule {
@@ -18,7 +20,28 @@ public abstract class MapRule {
         rule.setValue(valueRule);
     }
 
-    public Object get(String key) {
-        return rulesMap.get(key).getValue();
+    public Object getValue(String key){
+        Rule rule = rulesMap.get(key);
+        if (rule == null){
+            throw new RuntimeException("Clé '" + key + "' invalide!");
+        }
+        return rule.getValue();
+    }
+
+    public Rule get(String key){
+        Rule rule = rulesMap.get(key);
+        if (rule == null){
+            throw new RuntimeException("Clé '" + key + "' invalide!");
+        }
+        return rule;
+    }
+
+    public Set<Rule> allRules(){
+        Set<Rule> rulesSet = new HashSet<>();
+
+        for (Map.Entry<String, Rule> entry : rulesMap.entrySet()) {
+            rulesSet.add(entry.getValue());
+        }
+        return rulesSet;
     }
 }
