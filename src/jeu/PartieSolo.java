@@ -6,13 +6,12 @@ import gui.GUI;
 import listes.Combinaison;
 import listes.CombinaisonSecrete;
 import listes.RulesList;
-import rules.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class PartieSolo {
+public class PartieSolo implements Partie {
     private final Plateau plateau;
 
     List<Couleur> couleurAutorisees;
