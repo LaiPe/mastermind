@@ -3,16 +3,13 @@ package gui;
 import entities.Couleur;
 import jeu.Plateau;
 import listes.Combinaison;
-import listes.RulesList;
 import rules.Rule;
 import rules.map.MapRule;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public interface GUI {
     void afficherPlateau(Plateau plateau);
@@ -37,7 +34,6 @@ public interface GUI {
                 }
             }
         }
-
         return rules;
     }
 }
