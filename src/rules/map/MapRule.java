@@ -10,7 +10,7 @@ import java.util.Set;
 
 
 public class MapRule {
-    protected Map<String, Rule> rulesMap;
+    private final Map<String, Rule> rulesMap;
 
     public MapRule(){
         rulesMap = new HashMap<>();
