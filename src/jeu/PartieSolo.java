@@ -3,9 +3,11 @@ package jeu;
 import entities.Couleur;
 import entities.Pion;
 import gui.GUI;
+import gui.TerminalGUI;
 import listes.Combinaison;
 import listes.CombinaisonSecrete;
 import rules.map.MapRule;
+import rules.map.MapRulePartieSolo;
 
 
 import java.util.ArrayList;
@@ -13,7 +15,7 @@ import java.util.List;
 import java.util.Random;
 
 public class PartieSolo implements Partie {
-    private final Plateau plateau;
+    private Plateau plateau;
 
     List<Couleur> couleurAutorisees;
 
@@ -57,7 +59,7 @@ public class PartieSolo implements Partie {
         }
         return csRandom;
     }
-    public PartieSolo(MapRule rules, GUI gui) {
+    private void initPartieSolo(MapRule rules, GUI gui){
 
         int nbEssais = (int) rules.getValue("nbEssais");
         int tailleMaxCombinaison = (int) rules.getValue("tailleMaxCombinaison");
@@ -76,6 +78,15 @@ public class PartieSolo implements Partie {
 
         //Initialisation de la gui
         this.gui = gui;
+
+    }
+    public PartieSolo(MapRule rules, GUI gui) {
+        initPartieSolo(rules,gui);
+    }
+    public PartieSolo() {
+        MapRule rules = GUI.choixRules(new MapRulePartieSolo());
+        GUI gui = new TerminalGUI((boolean) rules.getValue("affichageTexte"));
+        initPartieSolo(rules,gui);
     }
 
     private void doTour(){

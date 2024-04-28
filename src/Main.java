@@ -19,11 +19,7 @@ public class Main {
             String res = reader.readLine();
             switch (res) {
                 case "1":
-                    MapRule rules = GUI.choixRules(new MapRulePartieSolo());
-
-                    GUI gui = new TerminalGUI((boolean) rules.getValue("affichageTexte"));
-
-                    PartieSolo partieSolo = new PartieSolo(rules,gui);
+                    PartieSolo partieSolo = new PartieSolo();
                     partieSolo.launchPartie();
             }
         } catch (IOException e) {
