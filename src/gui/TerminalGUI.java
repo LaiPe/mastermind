@@ -80,6 +80,11 @@ public class TerminalGUI implements GUI {
         );
     }
 
+    @Override
+    public void afficherVictoirePartieMulti(int indexJoueur) {
+        System.out.println(Couleur.VERT + "Félicitation Joueur " + indexJoueur + ",vous avez deviné votre combinaison secrète !" + Couleur.RESET);
+    }
+
     private Combinaison parse(String response, int tailleMax, List<Couleur> couleursAutorisees) throws IllegalArgumentException{
         if (response.length() > tailleMax){
             throw new IllegalArgumentException("La combinaison rentrée est trop longue !");
