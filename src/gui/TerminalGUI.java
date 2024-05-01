@@ -52,6 +52,7 @@ public class TerminalGUI implements GUI {
         System.out.println(plateau.getCombinaisonSecrete());
 
         System.out.println("=============== Essais ===============");
+        System.out.println("======== Partie 1 ; Joueur 1 =========");
         for (int i = 0; i < plateau.getNbEssais(); i++) {
             if (affichageTexte) {
                 System.out.println(plateau.getCombinaisonEssai(i));
@@ -72,8 +73,12 @@ public class TerminalGUI implements GUI {
     }
 
     @Override
-    public void afficherInfosJoueur(int i) {
-        System.out.println(Couleur.getByIndex(1 + i%8) + "============== Joueur " + i + " ==============" + Couleur.RESET);
+    public void afficherInfosPartieMulti(int indexPartie, int indexJoueur) {
+        System.out.println("======== Partie " +
+                indexPartie + " ; " +
+                Couleur.getByIndex(1 + indexJoueur%8) + "Joueur " + indexJoueur + Couleur.RESET +
+                " ========="
+        );
     }
 
     private Combinaison parse(String response, int tailleMax, List<Couleur> couleursAutorisees) throws IllegalArgumentException{

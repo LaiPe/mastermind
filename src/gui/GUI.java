@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface GUI {
     void afficherPlateau(Plateau plateau);
-    void afficherInfosJoueur(int i);
+    void afficherInfosPartieMulti(int indexPartie, int indexJoueur);
 
     Combinaison choixCombinaison(int tailleMax, List<Couleur> couleursAutorisees);
 
