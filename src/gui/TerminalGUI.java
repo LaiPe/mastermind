@@ -75,7 +75,7 @@ public class TerminalGUI implements GUI {
     public void afficherInfosPartieMulti(int indexPartie, int indexJoueur) {
         System.out.println("======== Partie " +
                 indexPartie + " ; " +
-                Couleur.getByIndex(1 + indexJoueur%8) + "Joueur " + indexJoueur + Couleur.RESET +
+                Couleur.getByIndex((1 + indexJoueur)%8) + "Joueur " + indexJoueur + Couleur.RESET +
                 " ========="
         );
     }
