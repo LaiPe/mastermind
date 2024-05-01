@@ -1,4 +1,5 @@
 import gui.GUI;
+import jeu.PartieMulti;
 import jeu.PartieSolo;
 
 import java.io.BufferedReader;
@@ -12,17 +13,31 @@ public class Main {
 
         GUI gui = GUI.choixGUI();
 
-        try {
+        boolean validRes = false;
+        while (!validRes) {
             System.out.println("1. Mode Solo");
-            String res = reader.readLine();
-
-            switch (res) {
-                case "1":
-                    PartieSolo partieSolo = new PartieSolo(gui);
-                    partieSolo.launchPartie();
+            System.out.println("2. Mode Multi");
+            System.out.println("q. Quitter");
+            try {
+                String res = reader.readLine();
+                switch (res) {
+                    case "1":
+                        PartieSolo partieSolo = new PartieSolo(gui);
+                        partieSolo.launchPartie();
+                        break;
+                    case "2":
+                        PartieMulti partieMulti = new PartieMulti(gui);
+                        partieMulti.launchPartie();
+                        break;
+                    case "q":
+                        validRes = true;
+                        break;
+                    default:
+                        System.out.println("Choix invalide, veuillez rentrer un caractère valide.");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }
