@@ -59,7 +59,7 @@ public class PartieSolo implements Partie {
         }
         return csRandom;
     }
-    private void initPartieSolo(MapRule rules, GUI gui){
+    private void initPartieSolo(GUI gui, MapRule rules){
 
         int nbEssais = (int) rules.getValue("nbEssais");
         int tailleMaxCombinaison = (int) rules.getValue("tailleMaxCombinaison");
@@ -80,8 +80,8 @@ public class PartieSolo implements Partie {
         this.gui = gui;
 
     }
-    public PartieSolo(MapRule rules, GUI gui) {
-        initPartieSolo(rules,gui);
+    public PartieSolo(GUI gui, MapRule rules) {
+        initPartieSolo(gui, rules);
     }
     public PartieSolo(GUI gui) {
 
@@ -93,11 +93,11 @@ public class PartieSolo implements Partie {
         rules.set("plsFoisMemeCouleur", new PlsFoisMemeCouleur());
         rules.set("affichageTexte", new AffichageTexte());
 
-        GUI.choixRules(rules);
+        gui.choixRules(rules);
 
         gui.setAffichageTexte((boolean) rules.getValue("affichageTexte"));
 
-        initPartieSolo(rules,gui);
+        initPartieSolo(gui, rules);
     }
 
     private void doTour(){

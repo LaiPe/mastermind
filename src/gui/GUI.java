@@ -18,26 +18,7 @@ public interface GUI {
 
     void setAffichageTexte(boolean affichageTexte);
 
-    static MapRule choixRules(MapRule rules){
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
-        for(Rule rule : rules.allRules()){
-            boolean validRes = false;
-            while (!validRes) {
-                System.out.print(rule.getDemande() + " : ");
-                try {
-                    String res = reader.readLine();
-                    rule.setValue(res);
-                    validRes = true;
-                } catch (IOException e){
-                    e.printStackTrace();
-                } catch (IllegalArgumentException e){
-                    System.out.println(Couleur.ROUGE + e.getMessage() + Couleur.RESET);
-                }
-            }
-        }
-        return rules;
-    }
+    MapRule choixRules(MapRule rules);
 
     static GUI choixGUI() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));

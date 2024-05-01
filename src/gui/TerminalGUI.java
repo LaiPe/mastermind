@@ -4,6 +4,8 @@ import entities.Couleur;
 import entities.Pion;
 import jeu.Plateau;
 import listes.Combinaison;
+import rules.Rule;
+import rules.map.MapRule;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,6 +20,28 @@ public class TerminalGUI implements GUI {
     @Override
     public void setAffichageTexte(boolean affichageTexte) {
         this.affichageTexte = affichageTexte;
+    }
+
+    @Override
+    public MapRule choixRules(MapRule rules){
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        for(Rule rule : rules.allRules()){
+            boolean validRes = false;
+            while (!validRes) {
+                System.out.print(rule.getDemande() + " : ");
+                try {
+                    String res = reader.readLine();
+                    rule.setValue(res);
+                    validRes = true;
+                } catch (IOException e){
+                    e.printStackTrace();
+                } catch (IllegalArgumentException e){
+                    System.out.println(Couleur.ROUGE + e.getMessage() + Couleur.RESET);
+                }
+            }
+        }
+        return rules;
     }
 
     @Override
