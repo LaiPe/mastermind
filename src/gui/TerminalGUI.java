@@ -71,6 +71,11 @@ public class TerminalGUI implements GUI {
         System.out.println();
     }
 
+    @Override
+    public void afficherInfosJoueur(int i) {
+        System.out.println(Couleur.getByIndex(1 + i%8) + "============== Joueur " + i + " ==============" + Couleur.RESET);
+    }
+
     private Combinaison parse(String response, int tailleMax, List<Couleur> couleursAutorisees) throws IllegalArgumentException{
         if (response.length() > tailleMax){
             throw new IllegalArgumentException("La combinaison rentrée est trop longue !");
