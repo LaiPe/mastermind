@@ -36,4 +36,30 @@ public interface GUI {
         }
         return rules;
     }
+
+    static GUI choixGUI(){
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        boolean validRes = false;
+
+
+        while (!validRes) {
+            System.out.println("Quel mode d'affichage souhaitez-vous ? : ");
+            System.out.println("1. Affichage dans le terminal");
+            System.out.println("2. Interface graphique");
+
+            try {
+                String res = reader.readLine();
+                switch (res) {
+                    case "1":
+                        return new TerminalGUI(true); //TODO Initialisation sans definition affichageTexte (separation du constructeur)
+                    case "2":
+                        System.out.println("WIP : ce mode d'affichage n'est pas encore disponible, veuillez en choisir un autre !");
+                }
+            } catch (IOException e){
+                e.printStackTrace();
+                throw new RuntimeException();
+            }
+        }
+        return null;
+    }
 }
