@@ -101,7 +101,7 @@ public class PartieSolo implements Partie {
     }
 
     @Override
-    public void doTour(){
+    public boolean doTour(){
         //Affichage du plateau
         gui.afficherPlateau(plateau);
 
@@ -113,16 +113,19 @@ public class PartieSolo implements Partie {
 
         //Placement de l'essai dans le plateau
         plateau.addEssai(essai);
+
+        return plateau.getCombinaisonSecrete().decouverte();
     }
 
     @Override
     public boolean launchPartie(){
+        boolean resultTour = false;
         //Boucle de jeu
-        while (!(plateau.estPlein() || plateau.getCombinaisonSecrete().decouverte())){
-            doTour();
+        while (!(plateau.estPlein() || resultTour)){
+            resultTour = doTour();
         }
-
-        if (plateau.getCombinaisonSecrete().decouverte()){
+        
+        if (resultTour){
             System.out.println("Bravo, vous avez gagné !");
             //gui affichage victoire
             return true;
@@ -131,5 +134,7 @@ public class PartieSolo implements Partie {
             //gui affichage défaite
             return false;
         }
+
+        
     }
 }
