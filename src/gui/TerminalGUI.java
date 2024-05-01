@@ -52,7 +52,6 @@ public class TerminalGUI implements GUI {
         System.out.println(plateau.getCombinaisonSecrete());
 
         System.out.println("=============== Essais ===============");
-        System.out.println("======== Partie 1 ; Joueur 1 =========");
         for (int i = 0; i < plateau.getNbEssais(); i++) {
             if (affichageTexte) {
                 System.out.println(plateau.getCombinaisonEssai(i));
