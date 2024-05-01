@@ -37,10 +37,11 @@ public interface GUI {
         return rules;
     }
 
-    static GUI choixGUI(){
+    static GUI choixGUI() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        boolean validRes = false;
+        GUI choix = new TerminalGUI(); // Valeur par défaut
 
+        boolean validRes = false;
 
         while (!validRes) {
             System.out.println("Quel mode d'affichage souhaitez-vous ? : ");
@@ -51,15 +52,20 @@ public interface GUI {
                 String res = reader.readLine();
                 switch (res) {
                     case "1":
-                        return new TerminalGUI(true); //TODO Initialisation sans definition affichageTexte (separation du constructeur)
+                        choix = new TerminalGUI();
+                        validRes = true;
+                        break;
                     case "2":
                         System.out.println("WIP : ce mode d'affichage n'est pas encore disponible, veuillez en choisir un autre !");
+                        break;
+                    default:
+                        System.out.println("Choix invalide, veuillez choisir 1 ou 2.");
                 }
-            } catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
                 throw new RuntimeException();
             }
         }
-        return null;
+        return choix;
     }
 }
