@@ -100,7 +100,7 @@ public class PartieSolo implements Partie {
         initPartieSolo(gui, rules);
     }
 
-    private void doTour(){
+    public void doTour(){
         //Affichage du plateau
         gui.afficherPlateau(plateau);
 
