@@ -81,8 +81,8 @@ public class TerminalGUI implements GUI {
     }
 
     @Override
-    public void afficherVictoirePartieMulti(int indexJoueur) {
-        System.out.println(Couleur.VERT + "Félicitation Joueur " + indexJoueur + ",vous avez deviné votre combinaison secrète !" + Couleur.RESET);
+    public void afficherVictoirePartieMulti(int indexJoueur, int cptEssais) {
+        System.out.println(Couleur.VERT + "Félicitation Joueur " + indexJoueur + ",vous avez deviné votre combinaison secrète en " + cptEssais + " essais !" + Couleur.RESET);
     }
 
     private Combinaison parse(String response, int tailleMax, List<Couleur> couleursAutorisees) throws IllegalArgumentException{
