@@ -1,8 +1,8 @@
 package jeu;
 
-public interface Partie {
+public interface Partie<T> {
 
-    boolean doTour();
+    T doTour();
     boolean launchPartie();
 
 }

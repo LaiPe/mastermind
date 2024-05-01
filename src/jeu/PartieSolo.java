@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class PartieSolo implements Partie {
+public class PartieSolo implements Partie<Boolean> {
     private Plateau plateau;
 
     List<Couleur> couleurAutorisees;
@@ -101,7 +101,7 @@ public class PartieSolo implements Partie {
     }
 
     @Override
-    public boolean doTour(){
+    public Boolean doTour(){
         //Affichage du plateau
         gui.afficherPlateau(plateau);
 
