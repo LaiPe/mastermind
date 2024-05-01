@@ -8,7 +8,8 @@ import listes.CombinaisonSecrete;
 public class GuiTest {
     public static void main(String[] args) {
         int tailleMax = 4;
-        TerminalGUI gui = new TerminalGUI(false);
+        TerminalGUI gui = new TerminalGUI();
+        gui.setAffichageTexte(false);
 
         CombinaisonSecrete cs = new CombinaisonSecrete(tailleMax);
         cs.addElement(new Pion(Couleur.ROUGE));

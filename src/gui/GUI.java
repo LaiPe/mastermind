@@ -16,6 +16,8 @@ public interface GUI {
 
     Combinaison choixCombinaison(int tailleMax, List<Couleur> couleursAutorisees);
 
+    void setAffichageTexte(boolean affichageTexte);
+
     static MapRule choixRules(MapRule rules){
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 

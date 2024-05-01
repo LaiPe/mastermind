@@ -11,9 +11,12 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 public class TerminalGUI implements GUI {
-    private final boolean affichageTexte;
+    private boolean affichageTexte;
 
-    public TerminalGUI(boolean affichageTexte){
+    public TerminalGUI(){}
+
+    @Override
+    public void setAffichageTexte(boolean affichageTexte) {
         this.affichageTexte = affichageTexte;
     }
 

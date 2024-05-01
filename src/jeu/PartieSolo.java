@@ -83,7 +83,7 @@ public class PartieSolo implements Partie {
     public PartieSolo(MapRule rules, GUI gui) {
         initPartieSolo(rules,gui);
     }
-    public PartieSolo() {
+    public PartieSolo(GUI gui) {
 
         MapRule rules = new MapRule();
 
@@ -95,7 +95,7 @@ public class PartieSolo implements Partie {
 
         GUI.choixRules(rules);
 
-        GUI gui = new TerminalGUI((boolean) rules.getValue("affichageTexte"));
+        gui.setAffichageTexte((boolean) rules.getValue("affichageTexte"));
 
         initPartieSolo(rules,gui);
     }
