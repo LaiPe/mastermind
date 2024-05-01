@@ -16,6 +16,7 @@ public abstract class RuleInteger implements Rule {
         }
     }
 
+    @Override
     public Integer getValue() {
         return value;
     }

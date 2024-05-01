@@ -1,7 +1,7 @@
 package rules.map;
 
 
-import rules.*;
+import rules.Rule;
 
 import java.util.HashMap;
 import java.util.HashSet;

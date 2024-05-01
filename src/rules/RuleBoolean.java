@@ -1,6 +1,6 @@
 package rules;
 
-public abstract class RuleBoolean{
+public abstract class RuleBoolean implements Rule{
     private boolean value;
     private final static String reponseErr = "Veuillez entrer un caractère valide !";
 
@@ -10,6 +10,7 @@ public abstract class RuleBoolean{
         this.demande = demande;
     }
 
+    @Override
     public void setValue(String key) throws IllegalArgumentException{
         if (key.equals("O") || key.equals("o")){
             value = true;
@@ -20,10 +21,12 @@ public abstract class RuleBoolean{
         }
     }
 
+    @Override
     public Boolean getValue() {
         return value;
     }
 
+    @Override
     public String getDemande(){
         return demande + " ('O' pour oui, 'N' pour non)";
     }
