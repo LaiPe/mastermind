@@ -15,6 +15,7 @@ public interface GUI {
     void afficherPlateau(Plateau plateau);
     void afficherInfosPartieMulti(int indexPartie, int indexJoueur);
     void afficherVictoirePartieMulti(int indexJoueur, int cptEssais);
+    void afficherScoresPartieMulti(boolean finPartie, List<Integer> listePointsTour, List<Integer> listePointsPartie);
 
     Combinaison choixCombinaison(int tailleMax, List<Couleur> couleursAutorisees);
 

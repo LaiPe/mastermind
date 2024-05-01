@@ -10,7 +10,7 @@ import rules.map.MapRule;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
+import java.util.*;
 
 public class TerminalGUI implements GUI {
     private boolean affichageTexte;
@@ -82,7 +82,49 @@ public class TerminalGUI implements GUI {
 
     @Override
     public void afficherVictoirePartieMulti(int indexJoueur, int cptEssais) {
-        System.out.println(Couleur.VERT + "Félicitation Joueur " + indexJoueur + ",vous avez deviné votre combinaison secrète en " + cptEssais + " essais !" + Couleur.RESET);
+        System.out.println(Couleur.VERT + "Félicitation Joueur " + indexJoueur + ", vous avez deviné votre combinaison secrète en " + cptEssais + " essais !" + Couleur.RESET);
+    }
+
+    @Override
+    public void afficherScoresPartieMulti(boolean finPartie, List<Integer> listePointsTour, List<Integer> listePointsPartie) {
+        if (finPartie){
+            List<Integer> listePoints = new ArrayList<>(listePointsPartie);
+            List<Integer> podium = new ArrayList<>();
+
+            int taillePodium = Math.min(listePointsPartie.size(), 3);
+
+            for (int i = 0; i < taillePodium; i++){
+                int max = listePoints.get(0);
+                int index = 0;
+
+                for (int j = 1; j < listePoints.size(); j++) {
+                    int elementCourant = listePoints.get(i);
+                    if (listePoints.get(j) > max) {
+                        max = elementCourant;
+                        index = j;
+                    }
+                }
+                listePoints.remove(index);
+                podium.add(index);
+            }
+
+            System.out.println("============== Podium ================");
+            System.out.println("1er : Joueur " + podium.get(0) + " avec " + listePointsPartie.get(podium.get(0)) + " points !");
+            for (int i = 1; i < taillePodium; i++) {
+                System.out.println((i+1) + "ème : Joueur " + (podium.get(i)+1) + " avec " + listePointsPartie.get(podium.get(i)) + " points !");
+            }
+
+        } else {
+            System.out.println("========= Tableau des scores =========");
+            System.out.println("Ce tour :");
+            for (int i = 0; i < listePointsTour.size(); i++) {
+                System.out.println("- Joueur " + (i+1) + " : +" + listePointsTour.get(i) + " points");
+            }
+            System.out.println("Récapitulatif des scores totaux :");
+            for (int i = 0; i < listePointsTour.size(); i++) {
+                System.out.println("- Joueur " + (i+1) + " : " + listePointsPartie.get(i) + " points");
+            }
+        }
     }
 
     private Combinaison parse(String response, int tailleMax, List<Couleur> couleursAutorisees) throws IllegalArgumentException{
