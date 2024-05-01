@@ -46,9 +46,9 @@ public interface GUI {
         boolean validRes = false;
 
         while (!validRes) {
-            System.out.println("Quel mode d'affichage souhaitez-vous ? : ");
+            System.out.println(Couleur.JAUNE + "Quel mode d'affichage souhaitez-vous ? : ");
             System.out.println("1. Affichage dans le terminal");
-            System.out.println("2. Interface graphique");
+            System.out.println("2. Interface graphique" + Couleur.RESET);
 
             try {
                 String res = reader.readLine();
