@@ -100,6 +100,7 @@ public class PartieSolo implements Partie {
         initPartieSolo(gui, rules);
     }
 
+    @Override
     public void doTour(){
         //Affichage du plateau
         gui.afficherPlateau(plateau);
@@ -114,6 +115,7 @@ public class PartieSolo implements Partie {
         plateau.addEssai(essai);
     }
 
+    @Override
     public boolean launchPartie(){
         //Boucle de jeu
         while (!(plateau.estPlein() || plateau.getCombinaisonSecrete().decouverte())){
