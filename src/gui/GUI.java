@@ -12,20 +12,19 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 public interface GUI {
-    void afficherPlateau(Plateau plateau);
-    void afficherInfosPartieMulti(int indexPartie, int indexJoueur);
-    void afficherVictoirePartieMulti(int indexJoueur, int cptEssais);
-    void afficherScoresPartieMulti(boolean finPartie, List<Integer> listePointsTour, List<Integer> listePointsPartie);
-
-    Combinaison choixCombinaison(int tailleMax, List<Couleur> couleursAutorisees);
-
     void setAffichageTexte(boolean affichageTexte);
 
     String getInput();
     void getInputPause();
 
-    MapRule choixRules(MapRule rules);
+    void afficherPlateau(Plateau plateau);
+    void afficherInfosPartieMulti(int indexPartie, int indexJoueur);
+    void afficherVictoirePartieMulti(int indexJoueur, int cptEssais);
+    void afficherScoresPartieMulti(boolean finPartie, List<Integer> listePointsTour, List<Integer> listePointsPartie);
 
+    MapRule choixRules(MapRule rules);
+    Combinaison choixCombinaison(int tailleMax, List<Couleur> couleursAutorisees);
+    String choixMenu();
     static GUI choixGUI() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         GUI choix = new TerminalGUI(); // Valeur par défaut

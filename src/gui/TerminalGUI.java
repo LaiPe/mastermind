@@ -182,4 +182,12 @@ public class TerminalGUI implements GUI {
 
         return null;
     }
+
+    @Override
+    public String choixMenu() {
+        System.out.println("1. Mode Solo");
+        System.out.println("2. Mode Multi");
+        System.out.println("q. Quitter");
+        return getInput();
+    }
 }
