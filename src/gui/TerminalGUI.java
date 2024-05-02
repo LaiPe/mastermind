@@ -23,6 +23,23 @@ public class TerminalGUI implements GUI {
     }
 
     @Override
+    public String getInput() {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            return reader.readLine();
+        } catch (IOException e){
+            e.printStackTrace();
+            throw new RuntimeException(e); //Plantage du programme
+        }
+    }
+
+    @Override
+    public void getInputPause() {
+        System.out.println("(Veuillez appuyer sur la touche 'Entrée' pour continuer)");
+        getInput();
+    }
+
+    @Override
     public MapRule choixRules(MapRule rules){
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 

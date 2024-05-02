@@ -21,6 +21,9 @@ public interface GUI {
 
     void setAffichageTexte(boolean affichageTexte);
 
+    String getInput();
+    void getInputPause();
+
     MapRule choixRules(MapRule rules);
 
     static GUI choixGUI() {
