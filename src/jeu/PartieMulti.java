@@ -65,6 +65,7 @@ public class PartieMulti implements Partie<List<Integer>>{
                     if (listeParties.get(i).doTour()) {
                         listePartiesFinies.set(i, Boolean.TRUE);
                         gui.afficherVictoirePartieMulti(i+1,listeCptEssais.get(i));
+                        gui.getInputPause();
                     }
                 }
             }
@@ -105,11 +106,12 @@ public class PartieMulti implements Partie<List<Integer>>{
             }
 
             gui.afficherScoresPartieMulti(false, listePointsTour, listePointsPartie);
+            gui.getInputPause();
 
         }
 
         gui.afficherScoresPartieMulti(true, listePointsTour, listePointsPartie);
-
+        gui.getInputPause();
         return true;
     }
 }
