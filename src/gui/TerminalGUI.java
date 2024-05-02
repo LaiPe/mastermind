@@ -2,6 +2,7 @@ package gui;
 
 import entities.Couleur;
 import entities.Pion;
+import io.SaveSignal;
 import jeu.Plateau;
 import listes.Combinaison;
 import rules.Rule;
@@ -168,7 +169,7 @@ public class TerminalGUI implements GUI {
         return result;
     }
     @Override
-    public Combinaison choixCombinaison(int tailleMax, List<Couleur> couleursAutorisees, String messageErr) throws IllegalArgumentException{
+    public Combinaison choixCombinaison(int tailleMax, List<Couleur> couleursAutorisees, String messageErr) throws IllegalArgumentException, SaveSignal {
 
         System.out.println("Veuillez rentrer la combinaison de chiffres correspondant aux couleurs que vous désirez pour votre essai.");
         for (int i = 0; i < couleursAutorisees.size(); i++){
@@ -180,12 +181,17 @@ public class TerminalGUI implements GUI {
         exemple.addElement(new Pion(couleursAutorisees.get(2)));
         exemple.addElement(new Pion(couleursAutorisees.get(3)));
         System.out.println("\nExemple : 1234 correspond à la combinaison " + exemple);
+        System.out.println("(Sauvegardez votre partie à tout moment en rentrant 'S')");
         if (messageErr != null) {
             afficherErreur(messageErr);
         }
 
         String res = getInput();
         clear();
+
+        if (res.equals("s") || res.equals("S")){
+            throw new SaveSignal();
+        }
 
         return parse(res, tailleMax, couleursAutorisees);
     }

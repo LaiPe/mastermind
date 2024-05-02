@@ -1,6 +1,7 @@
 package gui;
 
 import entities.Couleur;
+import io.SaveSignal;
 import jeu.Plateau;
 import listes.Combinaison;
 import rules.Rule;
@@ -24,7 +25,7 @@ public interface GUI {
     void afficherScoresPartieMulti(boolean finPartie, List<Integer> listePointsTour, List<Integer> listePointsPartie);
 
     MapRule choixRules(MapRule rules);
-    Combinaison choixCombinaison(int tailleMax, List<Couleur> couleursAutorisees, String messageErr) throws IllegalArgumentException;
+    Combinaison choixCombinaison(int tailleMax, List<Couleur> couleursAutorisees, String messageErr) throws IllegalArgumentException, SaveSignal;
     String choixMenu(boolean sigerr);
     static GUI choixGUI() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));

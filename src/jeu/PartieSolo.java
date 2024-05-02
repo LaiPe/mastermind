@@ -4,6 +4,7 @@ import entities.Couleur;
 import entities.Pion;
 import gui.GUI;
 import gui.TerminalGUI;
+import io.SaveSignal;
 import listes.Combinaison;
 import listes.CombinaisonSecrete;
 import rules.*;
@@ -114,6 +115,8 @@ public class PartieSolo implements Partie<Boolean> {
                 resValid = true;
             } catch (IllegalArgumentException e){
                 messageErr = e.getMessage();
+            } catch (SaveSignal e) {
+                //TODO Point départ sauvegarde
             }
         }
 
