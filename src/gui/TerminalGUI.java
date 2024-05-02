@@ -14,15 +14,14 @@ import java.util.*;
 
 public class TerminalGUI implements GUI {
     private boolean affichageTexte;
-
     public TerminalGUI(){}
-
     @Override
     public void setAffichageTexte(boolean affichageTexte) {
         this.affichageTexte = affichageTexte;
     }
 
-    @Override
+
+
     public String getInput() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
@@ -32,40 +31,22 @@ public class TerminalGUI implements GUI {
             throw new RuntimeException(e); //Plantage du programme
         }
     }
-
     @Override
     public void getInputPause() {
         System.out.println("(Veuillez appuyer sur la touche 'Entrée' pour continuer)");
         getInput();
     }
+    private void clear(){
+        System.out.println("\033[H\033[2J");
+    }
+
+
+
 
     @Override
     public void afficherErreur(String message) {
         System.out.println(Couleur.ROUGE + message + Couleur.RESET);
     }
-
-    private void clear(){
-        System.out.println("\033[H\033[2J");
-    }
-
-    @Override
-    public MapRule choixRules(MapRule rules){
-        for(Rule rule : rules.allRules()){
-            boolean validRes = false;
-            while (!validRes) {
-                System.out.print(rule.getDemande() + " : ");
-                try {
-                    String res = getInput();
-                    rule.setValue(res);
-                    validRes = true;
-                } catch (IllegalArgumentException e){
-                    afficherErreur(e.getMessage());
-                }
-            }
-        }
-        return rules;
-    }
-
     @Override
     public void afficherPlateau(Plateau plateau){
         System.out.println("======== Combinaison Secrète =========");
@@ -88,7 +69,6 @@ public class TerminalGUI implements GUI {
             System.out.println(factice);
         }
     }
-
     @Override
     public void afficherInfosPartieMulti(int indexPartie, int indexJoueur) {
         System.out.println("======== Partie " +
@@ -97,12 +77,10 @@ public class TerminalGUI implements GUI {
                 " ========="
         );
     }
-
     @Override
     public void afficherVictoirePartieMulti(int indexJoueur, int cptEssais) {
         System.out.println(Couleur.VERT + "Félicitation Joueur " + indexJoueur + ", vous avez deviné votre combinaison secrète en " + cptEssais + " essais !" + Couleur.RESET);
     }
-
     @Override
     public void afficherScoresPartieMulti(boolean finPartie, List<Integer> listePointsTour, List<Integer> listePointsPartie) {
         if (finPartie){
@@ -144,6 +122,30 @@ public class TerminalGUI implements GUI {
             }
         }
     }
+
+
+
+
+
+    @Override
+    public MapRule choixRules(MapRule rules){
+        for(Rule rule : rules.allRules()){
+            boolean validRes = false;
+            while (!validRes) {
+                System.out.print(rule.getDemande() + " : ");
+                try {
+                    String res = getInput();
+                    rule.setValue(res);
+                    validRes = true;
+                } catch (IllegalArgumentException e){
+                    afficherErreur(e.getMessage());
+                }
+            }
+        }
+        return rules;
+    }
+
+
 
     private Combinaison parse(String response, int tailleMax, List<Couleur> couleursAutorisees) throws IllegalArgumentException{
         if (response.length() > tailleMax){
