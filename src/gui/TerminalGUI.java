@@ -45,18 +45,14 @@ public class TerminalGUI implements GUI {
 
     @Override
     public MapRule choixRules(MapRule rules){
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
         for(Rule rule : rules.allRules()){
             boolean validRes = false;
             while (!validRes) {
                 System.out.print(rule.getDemande() + " : ");
                 try {
-                    String res = reader.readLine();
+                    String res = getInput();
                     rule.setValue(res);
                     validRes = true;
-                } catch (IOException e){
-                    e.printStackTrace();
                 } catch (IllegalArgumentException e){
                     System.out.println(Couleur.ROUGE + e.getMessage() + Couleur.RESET);
                 }
@@ -67,8 +63,6 @@ public class TerminalGUI implements GUI {
 
     @Override
     public void afficherPlateau(Plateau plateau){
-        System.out.println("\033[H\033[2J");
-
         System.out.println("======== Combinaison Secrète =========");
         System.out.println(plateau.getCombinaisonSecrete());
 
@@ -88,8 +82,6 @@ public class TerminalGUI implements GUI {
         for (int i = plateau.getNbEssais(); i < plateau.getNbEssaisMax(); i++) {
             System.out.println(factice);
         }
-
-        System.out.println();
     }
 
     @Override
@@ -167,9 +159,6 @@ public class TerminalGUI implements GUI {
     }
     @Override
     public Combinaison choixCombinaison(int tailleMax, List<Couleur> couleursAutorisees) {
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
         try {
             System.out.println("Veuillez rentrer la combinaison de chiffres correspondant aux couleurs que vous désirez pour votre essai.");
             for (int i = 0; i < couleursAutorisees.size(); i++){
@@ -183,12 +172,10 @@ public class TerminalGUI implements GUI {
             System.out.println("\nExemple : 1234 correspond à la combinaison " + exemple);
 
 
-            String res = reader.readLine();
+            String res = getInput();
 
             return parse(res, tailleMax, couleursAutorisees);
 
-        } catch (IOException e){
-            e.printStackTrace();
         } catch (IllegalArgumentException e){
             System.err.println(e.getMessage());
         }
