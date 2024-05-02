@@ -24,8 +24,8 @@ public interface GUI {
     void afficherScoresPartieMulti(boolean finPartie, List<Integer> listePointsTour, List<Integer> listePointsPartie);
 
     MapRule choixRules(MapRule rules);
-    Combinaison choixCombinaison(int tailleMax, List<Couleur> couleursAutorisees);
-    String choixMenu();
+    Combinaison choixCombinaison(int tailleMax, List<Couleur> couleursAutorisees, String messageErr) throws IllegalArgumentException;
+    String choixMenu(boolean sigerr);
     static GUI choixGUI() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         GUI choix = new TerminalGUI(); // Valeur par défaut

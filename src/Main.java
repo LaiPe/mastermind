@@ -7,23 +7,27 @@ public class Main {
 
         GUI gui = GUI.choixGUI();
 
-        boolean validRes = false;
-        while (!validRes) {
-            String res = gui.choixMenu();
+        boolean sigstop = false;
+        boolean sigerr = false;
+        while (!sigstop) {
+            String res = gui.choixMenu(sigerr);
             switch (res) {
                 case "1":
                     PartieSolo partieSolo = new PartieSolo(gui);
                     partieSolo.launchPartie();
+                    sigerr = false;
                     break;
                 case "2":
                     PartieMulti partieMulti = new PartieMulti(gui);
                     partieMulti.launchPartie();
+                    sigerr = false;
                     break;
                 case "q":
-                    validRes = true;
+                    sigerr = false;
+                    sigstop = true;
                     break;
                 default:
-                    gui.afficherErreur("Choix invalide, veuillez rentrer un caractère valide.");
+                    sigerr = true;
             }
         }
     }

@@ -101,14 +101,20 @@ public class PartieSolo implements Partie<Boolean> {
     }
 
     @Override
-    public Boolean doTour(){
-        //Affichage du plateau
-        gui.afficherPlateau(plateau);
+    public Boolean doTour() {
+        boolean resValid = false;
+        String messageErr = null;
 
-        //Création de la combinaison de l'essai du tour
-        Combinaison essai = gui.choixCombinaison(plateau.getTailleMaxCombinaison(), couleurAutorisees);
-        while (essai == null){
-            essai = gui.choixCombinaison(plateau.getTailleMaxCombinaison(), couleurAutorisees);
+        Combinaison essai = null;
+        while (!resValid) {
+
+            gui.afficherPlateau(plateau); //Affichage du plateau
+            try {
+                essai = gui.choixCombinaison(plateau.getTailleMaxCombinaison(), couleurAutorisees, messageErr); //Création de la combinaison de l'essai du tour.
+                resValid = true;
+            } catch (IllegalArgumentException e){
+                messageErr = e.getMessage();
+            }
         }
 
         //Placement de l'essai dans le plateau
@@ -124,17 +130,21 @@ public class PartieSolo implements Partie<Boolean> {
         while (!(plateau.estPlein() || resultTour)){
             resultTour = doTour();
         }
-        
+
+        gui.afficherPlateau(plateau);
+        boolean resultPartie = false;
         if (resultTour){
             System.out.println("Bravo, vous avez gagné !");
             //gui affichage victoire
-            return true;
+            resultPartie = true;
         } else {
             System.out.println("Dommage, vous avez perdu...");
             //gui affichage défaite
-            return false;
+            resultPartie = false;
         }
+        gui.getInputPause();
 
+        return resultPartie;
         
     }
 }

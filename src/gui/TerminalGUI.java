@@ -129,6 +129,8 @@ public class TerminalGUI implements GUI {
 
     @Override
     public MapRule choixRules(MapRule rules){
+        clear();
+        System.out.println("============ Paramètres ==============");
         for(Rule rule : rules.allRules()){
             boolean validRes = false;
             while (!validRes) {
@@ -142,6 +144,7 @@ public class TerminalGUI implements GUI {
                 }
             }
         }
+        clear();
         return rules;
     }
 
@@ -165,35 +168,37 @@ public class TerminalGUI implements GUI {
         return result;
     }
     @Override
-    public Combinaison choixCombinaison(int tailleMax, List<Couleur> couleursAutorisees) {
-        try {
-            System.out.println("Veuillez rentrer la combinaison de chiffres correspondant aux couleurs que vous désirez pour votre essai.");
-            for (int i = 0; i < couleursAutorisees.size(); i++){
-                System.out.print((i+1) + " pour " + couleursAutorisees.get(i) + couleursAutorisees.get(i).getNom() + Couleur.RESET + "; ");
-            }
-            Combinaison exemple = new Combinaison(4);
-            exemple.addElement(new Pion(couleursAutorisees.get(0)));
-            exemple.addElement(new Pion(couleursAutorisees.get(1)));
-            exemple.addElement(new Pion(couleursAutorisees.get(2)));
-            exemple.addElement(new Pion(couleursAutorisees.get(3)));
-            System.out.println("\nExemple : 1234 correspond à la combinaison " + exemple);
+    public Combinaison choixCombinaison(int tailleMax, List<Couleur> couleursAutorisees, String messageErr) throws IllegalArgumentException{
 
-
-            String res = getInput();
-
-            return parse(res, tailleMax, couleursAutorisees);
-
-        } catch (IllegalArgumentException e){
-            afficherErreur(e.getMessage());
+        System.out.println("Veuillez rentrer la combinaison de chiffres correspondant aux couleurs que vous désirez pour votre essai.");
+        for (int i = 0; i < couleursAutorisees.size(); i++){
+            System.out.print((i+1) + " pour " + couleursAutorisees.get(i) + couleursAutorisees.get(i).getNom() + Couleur.RESET + "; ");
         }
-        return null;
+        Combinaison exemple = new Combinaison(4);
+        exemple.addElement(new Pion(couleursAutorisees.get(0)));
+        exemple.addElement(new Pion(couleursAutorisees.get(1)));
+        exemple.addElement(new Pion(couleursAutorisees.get(2)));
+        exemple.addElement(new Pion(couleursAutorisees.get(3)));
+        System.out.println("\nExemple : 1234 correspond à la combinaison " + exemple);
+        if (messageErr != null) {
+            afficherErreur(messageErr);
+        }
+
+        String res = getInput();
+        clear();
+
+        return parse(res, tailleMax, couleursAutorisees);
     }
 
     @Override
-    public String choixMenu() {
+    public String choixMenu(boolean sigerr) {
+        clear();
         System.out.println("1. Mode Solo");
         System.out.println("2. Mode Multi");
         System.out.println("q. Quitter");
+        if (sigerr) {
+            afficherErreur("Choix invalide, veuillez rentrer un caractère valide.");
+        }
         return getInput();
     }
 }
