@@ -2,11 +2,6 @@ import gui.GUI;
 import jeu.PartieMulti;
 import jeu.PartieSolo;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
-
 public class Main {
     public static void main(String[] args) {
 
@@ -28,7 +23,7 @@ public class Main {
                     validRes = true;
                     break;
                 default:
-                    System.out.println("Choix invalide, veuillez rentrer un caractère valide.");
+                    gui.afficherErreur("Choix invalide, veuillez rentrer un caractère valide.");
             }
         }
     }

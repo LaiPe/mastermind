@@ -17,6 +17,7 @@ public interface GUI {
     String getInput();
     void getInputPause();
 
+    void afficherErreur(String message);
     void afficherPlateau(Plateau plateau);
     void afficherInfosPartieMulti(int indexPartie, int indexJoueur);
     void afficherVictoirePartieMulti(int indexJoueur, int cptEssais);

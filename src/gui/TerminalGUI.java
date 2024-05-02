@@ -39,6 +39,11 @@ public class TerminalGUI implements GUI {
         getInput();
     }
 
+    @Override
+    public void afficherErreur(String message) {
+        System.out.println(Couleur.ROUGE + message + Couleur.RESET);
+    }
+
     private void clear(){
         System.out.println("\033[H\033[2J");
     }
@@ -54,7 +59,7 @@ public class TerminalGUI implements GUI {
                     rule.setValue(res);
                     validRes = true;
                 } catch (IllegalArgumentException e){
-                    System.out.println(Couleur.ROUGE + e.getMessage() + Couleur.RESET);
+                    afficherErreur(e.getMessage());
                 }
             }
         }
@@ -177,9 +182,8 @@ public class TerminalGUI implements GUI {
             return parse(res, tailleMax, couleursAutorisees);
 
         } catch (IllegalArgumentException e){
-            System.err.println(e.getMessage());
+            afficherErreur(e.getMessage());
         }
-
         return null;
     }
 
