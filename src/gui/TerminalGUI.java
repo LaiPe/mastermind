@@ -39,6 +39,10 @@ public class TerminalGUI implements GUI {
         getInput();
     }
 
+    private void clear(){
+        System.out.println("\033[H\033[2J");
+    }
+
     @Override
     public MapRule choixRules(MapRule rules){
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
