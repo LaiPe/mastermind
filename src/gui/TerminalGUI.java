@@ -105,7 +105,7 @@ public class TerminalGUI implements GUI {
             }
 
             System.out.println("============== Podium ================");
-            System.out.println("1er : Joueur " + podium.get(0) + " avec " + listePointsPartie.get(podium.get(0)) + " points !");
+            System.out.println("1er : Joueur " + (podium.get(0)+1) + " avec " + listePointsPartie.get(podium.get(0)) + " points !");
             for (int i = 1; i < taillePodium; i++) {
                 System.out.println((i+1) + "ème : Joueur " + (podium.get(i)+1) + " avec " + listePointsPartie.get(podium.get(i)) + " points !");
             }
