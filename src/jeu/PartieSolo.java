@@ -102,7 +102,7 @@ public class PartieSolo implements Partie<Boolean> {
     }
 
     @Override
-    public Boolean doTour() {
+    public Boolean doTour() throws SaveSignal{
         boolean resValid = false;
         String messageErr = null;
 
@@ -115,8 +115,6 @@ public class PartieSolo implements Partie<Boolean> {
                 resValid = true;
             } catch (IllegalArgumentException e){
                 messageErr = e.getMessage();
-            } catch (SaveSignal e) {
-                //TODO Point départ sauvegarde
             }
         }
 
@@ -131,18 +129,22 @@ public class PartieSolo implements Partie<Boolean> {
         boolean resultTour = false;
         //Boucle de jeu
         while (!(plateau.estPlein() || resultTour)){
-            resultTour = doTour();
+            try {
+                resultTour = doTour();
+            } catch (SaveSignal e){
+                //TODO Save état partie
+            }
         }
 
         gui.afficherPlateau(plateau);
         boolean resultPartie = false;
         if (resultTour){
             System.out.println("Bravo, vous avez gagné !");
-            //gui affichage victoire
+            //TODO gui affichage victoire
             resultPartie = true;
         } else {
             System.out.println("Dommage, vous avez perdu...");
-            //gui affichage défaite
+            //TODO gui affichage défaite
             resultPartie = false;
         }
         gui.getInputPause();

@@ -1,6 +1,7 @@
 package jeu;
 
 import gui.GUI;
+import io.SaveSignal;
 import rules.*;
 import rules.map.MapRule;
 
@@ -44,7 +45,7 @@ public class PartieMulti implements Partie<List<Integer>>{
     }
 
     @Override
-    public List<Integer> doTour() {
+    public List<Integer> doTour() throws SaveSignal {
         List<PartieSolo> listeParties = new ArrayList<>();
         List<Boolean> listePartiesFinies = new ArrayList<>();
         List<Integer> listeCptEssais = new ArrayList<>();
@@ -98,6 +99,7 @@ public class PartieMulti implements Partie<List<Integer>>{
 
         //Boucle de Partie
         List<Integer> listePointsTour = null;
+
         while (indexTourEnCours <= nbParties) {
             listePointsTour = doTour();
 
