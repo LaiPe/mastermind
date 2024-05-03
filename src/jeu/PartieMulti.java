@@ -1,7 +1,7 @@
 package jeu;
 
 import gui.GUI;
-import io.SaveSignal;
+import io.save.SaveSignal;
 import rules.*;
 import rules.map.MapRule;
 
