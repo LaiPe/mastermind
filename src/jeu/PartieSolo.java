@@ -3,7 +3,7 @@ package jeu;
 import entities.Couleur;
 import entities.Pion;
 import gui.GUI;
-import io.save.SaveSignal;
+import io.saves.SaveSignal;
 import listes.Combinaison;
 import listes.CombinaisonSecrete;
 import rules.*;

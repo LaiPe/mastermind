@@ -1,4 +1,4 @@
-package io.save;
+package io.saves;
 
 public class SaveSignal extends Throwable{
 

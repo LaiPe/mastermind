@@ -1,6 +1,6 @@
 package jeu;
 
-import io.save.SaveSignal;
+import io.saves.SaveSignal;
 
 public interface Partie<T> {
 

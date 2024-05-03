@@ -2,7 +2,7 @@ package gui;
 
 import entities.Couleur;
 import entities.Pion;
-import io.SaveSignal;
+import io.saves.SaveSignal;
 import jeu.Plateau;
 import listes.Combinaison;
 import rules.Rule;

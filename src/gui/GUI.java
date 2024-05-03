@@ -1,10 +1,9 @@
 package gui;
 
 import entities.Couleur;
-import io.SaveSignal;
+import io.saves.SaveSignal;
 import jeu.Plateau;
 import listes.Combinaison;
-import rules.Rule;
 import rules.map.MapRule;
 
 import java.io.BufferedReader;
