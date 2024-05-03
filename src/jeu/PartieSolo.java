@@ -14,13 +14,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class PartieSolo implements Partie<Boolean> {
+public class PartieSolo implements Partie {
     private Plateau plateau;
-
     List<Couleur> couleurAutorisees;
 
     GUI gui;
 
+    public Plateau getPlateau() {
+        return plateau;
+    }
+    public List<Couleur> getCouleurAutorisees() {
+        return couleurAutorisees;
+    }
 
     private List<Couleur> selecRandCouleurs(int nbCouleur){
         List<Couleur> couleurs = new ArrayList<>(8);
@@ -100,8 +105,12 @@ public class PartieSolo implements Partie<Boolean> {
         initPartieSolo(gui, rules);
     }
 
+    public boolean finie(){
+        return (plateau.estPlein() || plateau.getCombinaisonSecrete().decouverte());
+    }
+
     @Override
-    public Boolean doTour() throws SaveSignal{
+    public void doTour() throws SaveSignal{
         boolean resValid = false;
         String messageErr = null;
 
@@ -119,36 +128,29 @@ public class PartieSolo implements Partie<Boolean> {
 
         //Placement de l'essai dans le plateau
         plateau.addEssai(essai);
-
-        return plateau.getCombinaisonSecrete().decouverte();
     }
 
     @Override
-    public boolean launchPartie(){
-        boolean resultTour = false;
+    public void launchPartie(){
         //Boucle de jeu
-        while (!(plateau.estPlein() || resultTour)){
+        while (!finie()){
             try {
-                resultTour = doTour();
+                doTour();
             } catch (SaveSignal e){
                 //TODO Save état partie
             }
         }
 
+        //Affichage Final
         gui.afficherPlateau(plateau);
-        boolean resultPartie = false;
-        if (resultTour){
+        if (plateau.getCombinaisonSecrete().decouverte()){
             System.out.println("Bravo, vous avez gagné !");
             //TODO gui affichage victoire
-            resultPartie = true;
         } else {
             System.out.println("Dommage, vous avez perdu...");
             //TODO gui affichage défaite
-            resultPartie = false;
+
         }
         gui.getInputPause();
-
-        return resultPartie;
-        
     }
 }

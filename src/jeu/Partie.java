@@ -2,9 +2,9 @@ package jeu;
 
 import io.saves.SaveSignal;
 
-public interface Partie<T> {
+public interface Partie {
 
-    T doTour() throws SaveSignal;
-    boolean launchPartie();
+    void doTour() throws SaveSignal;
+    void launchPartie();
 
 }

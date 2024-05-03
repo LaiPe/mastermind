@@ -8,13 +8,15 @@ import rules.map.MapRule;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PartieMulti implements Partie<List<Integer>>{
+public class PartieMulti implements Partie{
 
-    private int nbJoueurs;
-    private int nbParties;
-    private MapRule rules;
+    private final int nbJoueurs;
+    private final int nbParties;
+    private final MapRule rules;
 
-    private GUI gui;
+    private final GUI gui;
+
+    private final List<Integer> pointsPartie;
 
     private int indexTourEnCours;
 
@@ -40,80 +42,126 @@ public class PartieMulti implements Partie<List<Integer>>{
         this.rules = rules;
         this.gui = gui;
 
-        indexTourEnCours = 1;
+        pointsPartie = new ArrayList<>();
+        for (int i = 0; i < nbJoueurs; i++) {
+            pointsPartie.add(0);
+        }
+
+        indexTourEnCours = 0;
 
     }
 
-    @Override
-    public List<Integer> doTour() throws SaveSignal {
-        List<PartieSolo> listeParties = new ArrayList<>();
-        List<Boolean> listePartiesFinies = new ArrayList<>();
-        List<Integer> listeCptEssais = new ArrayList<>();
+    private void updatePointsPartie(List<Integer> listePointsTour){
+        for (int i = 0; i < nbJoueurs; i++) {
+            pointsPartie.set(i, pointsPartie.get(i) + listePointsTour.get(i)); //addition point du tour avec ceux de la partie.
+        }
+    }
 
-        for (int i = 0; i < nbJoueurs; i++){
-            listePartiesFinies.add(Boolean.FALSE);
-            listeParties.add(new PartieSolo(gui, rules));
-            listeCptEssais.add(0);
+    private class TourPartieMulti{
+        private final List<PartieSolo> parties;
+        private final List<Boolean> partiesFinies;
+        private final List<Integer> pointsTour;
+
+        public List<PartieSolo> getParties() {
+            return parties;
         }
 
-        //Boucle du Tour
-        while (!tourFini(listePartiesFinies)) { // Tant que toutes les parties solos qui composent le tour ne sont pas finies.
-            for (int i = 0; i < nbJoueurs; i++) {
-                if (!listePartiesFinies.get(i)) { //Si le joueur i n'a pas fini sa partie
-                    listeCptEssais.set(i,listeCptEssais.get(i) + 1); //Incrémente compteur essai du joueur
+        public List<Boolean> getPartiesFinies() {
+            return partiesFinies;
+        }
 
-                    gui.afficherInfosPartieMulti(indexTourEnCours, i+1);
-                    if (listeParties.get(i).doTour()) {
-                        listePartiesFinies.set(i, Boolean.TRUE);
-                        gui.afficherVictoirePartieMulti(i+1,listeCptEssais.get(i));
-                        gui.getInputPause();
+        private void setPointsTour(List<Integer> listeCptEssais){
+            for (int i = 0; i < nbJoueurs; i++){
+                //Pour chaque joueur, difference entre le nb d'essais max et le nb d'essais utilisés
+                pointsTour.set(i,((Integer) rules.getValue("nbEssais")) - listeCptEssais.get(i));
+            }
+        }
+        public List<Integer> getPointsTour() {
+            return pointsTour;
+        }
+
+        TourPartieMulti(){
+            parties = new ArrayList<>();
+            partiesFinies = new ArrayList<>();
+            pointsTour = new ArrayList<>();
+
+            for (int i = 0; i < nbJoueurs; i++){
+                partiesFinies.add(Boolean.FALSE);
+                parties.add(new PartieSolo(gui, rules));
+                pointsTour.add(0);
+            }
+        }
+
+        private boolean tourFini(){
+            for (Boolean b : partiesFinies){
+                if (!b){
+                    return false;
+                }
+            }
+            return true;
+        }
+        public void launch() throws SaveSignal{
+            List<Integer> listeCptEssais = new ArrayList<>(); //Compteur du nombre d'essais effectués par chaque joueur
+            for (int i = 0; i < nbJoueurs; i++){
+                listeCptEssais.add(0);
+            }
+
+            while (!tourFini()) { // Tant que toutes les parties solos qui composent le tour ne sont pas finies.
+
+                for (int i = 0; i < nbJoueurs; i++) { // Pour chaque joueur
+                    PartieSolo partieJoueur = parties.get(i);
+
+                    if (!partiesFinies.get(i)) { //Si le joueur i n'a pas fini sa partie
+
+                        listeCptEssais.set(i,listeCptEssais.get(i) + 1); //Incrémente compteur essai du joueur
+
+                        gui.afficherInfosPartieMulti(indexTourEnCours, i+1); //Infos GUI
+
+                        partieJoueur.doTour(); //Faire le tour (au sens tour de PartieSolo) du joueur.
+
+                        if (partieJoueur.finie()) { // Si le tour a abouti à la fin de la PartieSolo du joueur
+                            partiesFinies.set(i, Boolean.TRUE);
+                            gui.afficherVictoirePartieMulti(i+1,listeCptEssais.get(i)); //TODO prévoir cas défaite (cf. affichage TODO pour PartieSolo)
+                            gui.getInputPause();
+                        }
                     }
                 }
             }
+            //Compter les points des joueurs
+            setPointsTour(listeCptEssais);
         }
-        indexTourEnCours++;
-
-        List<Integer> listePoints = new ArrayList<>();
-        for (int i = 0; i < nbJoueurs; i++){
-            listePoints.add(((Integer) rules.getValue("nbEssais")) - listeCptEssais.get(i));
-            //Pour chaque joueur, difference entre le nb d'essais max et le nb d'essais utilisés
-        }
-        return listePoints;
-    }
-
-    private boolean tourFini(List<Boolean> listePartiesFinies){
-        for (Boolean b : listePartiesFinies){
-            if (!b){
-                return false;
-            }
-        }
-        return true;
     }
 
     @Override
-    public boolean launchPartie() {
-        List<Integer> listePointsPartie = new ArrayList<>();
-        for (int i = 0; i < nbJoueurs; i++) {
-            listePointsPartie.add(0);
+    public void doTour() {
+        // Tour de PartieMulti = Tour de PartieSolo * nbJoueurs
+        TourPartieMulti tour = new TourPartieMulti();
+        indexTourEnCours++;
+        try {
+            tour.launch(); //Lancement du tour
+        } catch (SaveSignal e){
+            //TODO Save état partie
         }
+        //Mise à jour des points de la partie
+        List<Integer> pointsTour = tour.getPointsTour();
+        updatePointsPartie(pointsTour);
 
-        //Boucle de Partie
-        List<Integer> listePointsTour = null;
-
-        while (indexTourEnCours <= nbParties) {
-            listePointsTour = doTour();
-
-            for (int i = 0; i < nbJoueurs; i++) {
-                listePointsPartie.set(i, listePointsPartie.get(i) + listePointsTour.get(i)); //addition point du tour avec ceux de la partie.
-            }
-
-            gui.afficherScoresPartieMulti(false, listePointsTour, listePointsPartie);
-            gui.getInputPause();
-
-        }
-
-        gui.afficherScoresPartieMulti(true, listePointsTour, listePointsPartie);
+        //Affichage fin de tour (scores)
+        gui.afficherScoresPartieMulti(false, pointsTour, pointsPartie);
         gui.getInputPause();
-        return true;
+    }
+
+    @Override
+    public void launchPartie() {
+        System.out.println(nbJoueurs);
+        //Boucle de Partie
+        while (indexTourEnCours <= nbParties) {
+            doTour();
+        }
+
+        //Affichage Final de partie (podium)
+        gui.afficherScoresPartieMulti(true, null, pointsPartie); //TODO Signature à revoir (=> SURCHARGE: 2 signatures)
+        gui.getInputPause();
+
     }
 }
