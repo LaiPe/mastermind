@@ -3,6 +3,9 @@ package io.saves;
 import entities.Couleur;
 import jeu.PartieMulti;
 import jeu.Plateau;
+import listes.Combinaison;
+import listes.CombinaisonSecrete;
+import listes.TentativeResult;
 import rules.Rule;
 import rules.map.MapRule;
 
@@ -135,12 +138,38 @@ public class Save {
                 }
             }
 
-            //TODO Dans ce répertoire, créer un fichier qui représente le plateau :
-            // représentation des combinaisons par leur index d'énum  (1 -> Noir; 2-> Rouge; ...)
-            // première ligne : combinason secrète + \n
-            // Ensuite pour chaque essai: Combnaison essai ; Tentative result associé + \n
-            // Enfin: Pour chaque essai vide => écrire un point + \n
+            Plateau plateau = liJoueurs.get(i).getPlateau();
+            Path plateauFile = Paths.get(joueurDirectory + "/plateau.csv");
+            Files.createFile(plateauFile);
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(plateauFile.toString()))) {
 
+                CombinaisonSecrete cs = plateau.getCombinaisonSecrete();
+                StringBuilder sb = new StringBuilder();
+                for (int c = 0 ; c < cs.getTaille() ; c++){
+                    sb.append(cs.getElement(c).getCouleurPion().getIndex());
+                }
+                writer.write(sb.toString());
+                writer.newLine();
+
+
+                for (int c = 0 ; c < plateau.getNbEssais() ; c++){
+                    StringBuilder sbEssais = new StringBuilder();
+                    Combinaison combinaison = plateau.getCombinaisonEssai(c);
+                    for (int d = 0 ; d < combinaison.getTaille() ; d++){
+                        sbEssais.append(combinaison.getElement(d).getCouleurPion().getIndex());
+                    }
+                    sbEssais.append(",");
+                    TentativeResult tresult = plateau.getResultEssai(c);
+                    for (int d = 0 ; d < tresult.getTaille() ; d++){
+                        sbEssais.append(tresult.getElement(d).getIndex());
+                    }
+                    writer.write(sbEssais.toString());
+                }
+                for (int c = plateau.getNbEssais() ; c < plateau.getNbEssaisMax() ; c++){
+                    writer.newLine();
+                    writer.write(".");
+                }
+            }
         }
     }
 }
