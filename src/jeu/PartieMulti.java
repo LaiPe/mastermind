@@ -134,7 +134,7 @@ public class PartieMulti implements Partie{
     }
 
     @Override
-    public void doTour() {
+    public void doTour() throws SaveSignal {
         // Tour de PartieMulti = Tour de PartieSolo * nbJoueurs
         TourPartieMulti tour = new TourPartieMulti();
         indexTourEnCours++;
@@ -142,6 +142,7 @@ public class PartieMulti implements Partie{
             tour.launch(); //Lancement du tour
         } catch (SaveSignal e){
             //TODO Save état partie
+            throw e;
         }
         //Mise à jour des points de la partie
         List<Integer> pointsTour = tour.getPointsTour();
@@ -157,7 +158,11 @@ public class PartieMulti implements Partie{
         System.out.println(nbJoueurs);
         //Boucle de Partie
         while (indexTourEnCours < nbParties) {
-            doTour();
+            try {
+                doTour();
+            } catch (SaveSignal e){
+                return;
+            }
         }
 
         //Affichage Final de partie (podium)

@@ -3,6 +3,7 @@ package jeu;
 import entities.Couleur;
 import entities.Pion;
 import gui.GUI;
+import io.saves.Save;
 import io.saves.SaveSignal;
 import listes.Combinaison;
 import listes.CombinaisonSecrete;
@@ -10,9 +11,8 @@ import rules.*;
 import rules.map.MapRule;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.io.IOException;
+import java.util.*;
 
 public class PartieSolo implements Partie {
     private Plateau plateau;
@@ -143,8 +143,19 @@ public class PartieSolo implements Partie {
         while (!finie()){
             try {
                 doTour();
-            } catch (SaveSignal e){
-                //TODO Save état partie
+            } catch (SaveSignal s){
+                Save save = new Save();
+                save.addTypePartie(this.getClass().getSimpleName());
+                save.addDataJoueur(plateau,couleurAutorisees);
+                try {
+                    save.doSave();
+                    System.out.println("Sauvegarde situé dans le répertoire \"" + save.getSavePathName() + "\".");
+                } catch (IOException e){
+                    gui.afficherErreur("Erreur lors de la création du répertoire : " + e.getMessage());
+                }
+
+                gui.getInputPause();
+                return;
             }
         }
 
