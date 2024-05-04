@@ -156,7 +156,7 @@ public class PartieMulti implements Partie{
     public void launchPartie() {
         System.out.println(nbJoueurs);
         //Boucle de Partie
-        while (indexTourEnCours <= nbParties) {
+        while (indexTourEnCours < nbParties) {
             doTour();
         }
 
