@@ -10,9 +10,6 @@ import java.nio.file.Paths;
 
 public class SaveTest {
     public static void main(String[] args) {
-        Save maSave = new Save();
-        maSave.addTypePartie(PartieSolo.class.getSimpleName());
-
         Path path = Paths.get("./tests/hello.txt");
 
         // Créer l'arborescence de répertoires si nécessaire

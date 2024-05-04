@@ -1,8 +1,12 @@
 package io.saves;
 
 import entities.Couleur;
+import jeu.PartieMulti;
 import jeu.Plateau;
+import rules.map.MapRule;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,54 +19,49 @@ import java.util.List;
 import java.util.Map;
 
 public class Save {
-    private Map<String,Object> dataSave;
-
     private static final String rootSavesPath = "./saves";
     private Path savePath;
 
-    public Save(){
-        dataSave = new HashMap<>();
-        dataSave.put("liJoueurs", new ArrayList<DataJoueur>());
-    }
+
+    private String typePartie;
+    private int indexTourEnCours;
+    private MapRule rules;
+
+    private List<DataJoueur> liJoueurs;
 
 
-    private class DataJoueur{
-        private Map<String, Object> dataJoueur;
+    public Save(String typePartie, int indexTourEnCours){
+        this.typePartie = typePartie;
+        this.indexTourEnCours = indexTourEnCours;
 
-        public DataJoueur(Plateau plateau, List<Couleur> couleurAutorisees){
-            dataJoueur = new HashMap<>();
-            dataJoueur.put("plateau", plateau);
-            dataJoueur.put("couleurAutorisees", couleurAutorisees);
-        }
-
-        public Plateau getPlateau(){
-            return (Plateau) dataJoueur.get("plateau");
-        }
-        public List<Couleur> getCouleurAutorisees(){
-            return (List<Couleur>) dataJoueur.get("couleurAutorisees");
-        }
-    }
-
-    public void addDataJoueur(Plateau plateau, List<Couleur> couleurAutorisees){
-        ((ArrayList<DataJoueur>) dataSave.get("liJoueurs")).add(new DataJoueur(plateau,couleurAutorisees));
-    }
-    public DataJoueur getDataJoueur(int index){
-        return ((ArrayList<DataJoueur>) dataSave.get("liJoueurs")).get(index);
-    }
-
-    public void addNbJoueurs(Integer nbJoueurs){
-        dataSave.put("nbJoueurs", nbJoueurs);
-    }
-    public void addIndexTourEnCours(Integer indexTourEnCours){
-        dataSave.put("indexTourEnCours", indexTourEnCours);
-    }
-    public void addTypePartie(String typePartie){
-        dataSave.put("typePartie", typePartie);
+        liJoueurs = new ArrayList<>();
     }
 
     public String getSavePathName() {
         return savePath.toString();
     }
+
+
+    private class DataJoueur{
+        Plateau plateau;
+        List<Couleur> couleurAutorisees;
+
+        public DataJoueur(Plateau plateau, List<Couleur> couleurAutorisees){
+            this.plateau = plateau;
+            this.couleurAutorisees = couleurAutorisees;
+        }
+
+        public Plateau getPlateau(){
+            return plateau;
+        }
+        public List<Couleur> getCouleurAutorisees(){
+            return couleurAutorisees;
+        }
+    }
+    public void addDataJoueur(Plateau plateau, List<Couleur> couleurAutorisees){
+        liJoueurs.add(new DataJoueur(plateau, couleurAutorisees));
+    }
+
 
 
 
@@ -99,14 +98,19 @@ public class Save {
 
         savePath = createSaveDirectory();
 
-        Files.createFile(Paths.get(getSavePathName() + "/savedata.txt"));
-        
-            //TODO écrire le type de partie: Solo ou Multi
+        Path savedata = Paths.get(getSavePathName() + "/savedata.txt");
+        Files.createFile(savedata);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(savedata.toString()))) {
+            writer.write(typePartie);
+            writer.newLine();
+            writer.write(String.valueOf(indexTourEnCours));
+        }
 
-            //TODO Si nbParties existe dans la Map, ecrire nbParties.
-            //TODO Si indexTourEnCours existe dans la Map, écrire indexTourEnCours.
+        //TODO écrire rules "rules.txt"
 
-
+        if (typePartie.equals(PartieMulti.class.getSimpleName())){
+            //TODO écrire points
+        }
 
 
         //TODO Si nbParties existe dans la Map, i = nbJoueurs, sinon i = 1.

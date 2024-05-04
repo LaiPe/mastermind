@@ -16,11 +16,11 @@ import java.util.*;
 
 public class PartieSolo implements Partie {
     private Plateau plateau;
-    List<Couleur> couleurAutorisees;
+    private List<Couleur> couleurAutorisees;
 
     private int indexTourEnCours;
 
-    GUI gui;
+    private GUI gui;
 
     public Plateau getPlateau() {
         return plateau;
@@ -144,8 +144,7 @@ public class PartieSolo implements Partie {
             try {
                 doTour();
             } catch (SaveSignal s){
-                Save save = new Save();
-                save.addTypePartie(this.getClass().getSimpleName());
+                Save save = new Save(this.getClass().getSimpleName(),indexTourEnCours);
                 save.addDataJoueur(plateau,couleurAutorisees);
                 try {
                     save.doSave();
