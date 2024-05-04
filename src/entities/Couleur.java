@@ -38,4 +38,7 @@ public enum Couleur {
     public String getNom() {
         return nom;
     }
+    public int getIndex() {
+        return index;
+    }
 }
