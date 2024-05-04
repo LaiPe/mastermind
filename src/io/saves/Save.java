@@ -99,7 +99,8 @@ public class Save {
 
         savePath = createSaveDirectory();
 
-        //TODO À la racine de ce répertoire, dans un fichier général "savedata.txt" :
+        Files.createFile(Paths.get(getSavePathName() + "/savedata.txt"));
+        
             //TODO écrire le type de partie: Solo ou Multi
 
             //TODO Si nbParties existe dans la Map, ecrire nbParties.

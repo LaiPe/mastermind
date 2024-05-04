@@ -151,7 +151,7 @@ public class PartieSolo implements Partie {
                     save.doSave();
                     System.out.println("Sauvegarde situé dans le répertoire \"" + save.getSavePathName() + "\".");
                 } catch (IOException e){
-                    gui.afficherErreur("Erreur lors de la création du répertoire : " + e.getMessage());
+                    gui.afficherErreur("Erreur lors de la création de la sauvegarde : " + e.getMessage());
                 }
 
                 gui.getInputPause();
