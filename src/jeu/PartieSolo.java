@@ -108,6 +108,9 @@ public class PartieSolo implements Partie {
     public boolean finie(){
         return (plateau.estPlein() || plateau.getCombinaisonSecrete().decouverte());
     }
+    public boolean gagnee(){
+        return plateau.getCombinaisonSecrete().decouverte();
+    }
 
     @Override
     public void doTour() throws SaveSignal{
@@ -143,7 +146,7 @@ public class PartieSolo implements Partie {
 
         //Affichage Final
         gui.afficherPlateau(plateau);
-        if (plateau.getCombinaisonSecrete().decouverte()){
+        if (gagnee()){
             System.out.println("Bravo, vous avez gagné !");
             //TODO gui affichage victoire
         } else {
