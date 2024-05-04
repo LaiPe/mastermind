@@ -22,6 +22,8 @@ public class PartieSolo implements Partie {
 
     private GUI gui;
 
+    private MapRule rules;
+
     public Plateau getPlateau() {
         return plateau;
     }
@@ -86,6 +88,8 @@ public class PartieSolo implements Partie {
         //Initialisation de la gui
         this.gui = gui;
 
+        this.rules = rules;
+
         indexTourEnCours = 0;
 
     }
@@ -123,7 +127,7 @@ public class PartieSolo implements Partie {
 
         Combinaison essai = null;
         while (!resValid) {
-            indexTourEnCours++;
+            indexTourEnCours++; //TODO ATTENTION A METTRE APRES LE TRY CATCH
             gui.afficherPlateau(plateau); //Affichage du plateau
             try {
                 essai = gui.choixCombinaison(plateau.getTailleMaxCombinaison(), couleurAutorisees, messageErr); //Création de la combinaison de l'essai du tour.
@@ -144,7 +148,7 @@ public class PartieSolo implements Partie {
             try {
                 doTour();
             } catch (SaveSignal s){
-                Save save = new Save(this.getClass().getSimpleName(),indexTourEnCours);
+                Save save = new Save(this.getClass().getSimpleName(),indexTourEnCours, rules);
                 save.addDataJoueur(plateau,couleurAutorisees);
                 try {
                     save.doSave();

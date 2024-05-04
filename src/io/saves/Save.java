@@ -3,6 +3,7 @@ package io.saves;
 import entities.Couleur;
 import jeu.PartieMulti;
 import jeu.Plateau;
+import rules.Rule;
 import rules.map.MapRule;
 
 import java.io.BufferedWriter;
@@ -30,9 +31,10 @@ public class Save {
     private List<DataJoueur> liJoueurs;
 
 
-    public Save(String typePartie, int indexTourEnCours){
+    public Save(String typePartie, int indexTourEnCours, MapRule rules){
         this.typePartie = typePartie;
         this.indexTourEnCours = indexTourEnCours;
+        this.rules = rules;
 
         liJoueurs = new ArrayList<>();
     }
@@ -106,7 +108,14 @@ public class Save {
             writer.write(String.valueOf(indexTourEnCours));
         }
 
-        //TODO écrire rules "rules.txt"
+        Path rules = Paths.get(getSavePathName() + "/rules.csv");
+        Files.createFile(rules);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(rules.toString()))) {
+            for (Rule rule : this.rules.allRules()) {
+                writer.write(rule.getClass().getSimpleName() + "," + rule.getValue().toString());
+                writer.newLine();
+            }
+        }
 
         if (typePartie.equals(PartieMulti.class.getSimpleName())){
             //TODO écrire points
