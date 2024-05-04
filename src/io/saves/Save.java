@@ -121,12 +121,9 @@ public class Save {
             //TODO écrire points
         }
 
-
-        //TODO Si nbParties existe dans la Map, i = nbJoueurs, sinon i = 1.
-        // for i = nbJoueurs ; i > 0 ;i-- :
-
-            //TODO Creer un répertoire nommé "i"
-            // exemple : "mastermind/saves/03-05-2024-11-51/1/"; "mastermind/saves/03-05-2024-11-51/2/" (pour une partie de 2 joueurs)
+        for (int i = 0 ; i < liJoueurs.size() ; i++) {
+            Path joueurDirectory = Paths.get(getSavePathName(), String.valueOf(i+1));
+            Files.createDirectories(joueurDirectory);
 
             //TODO Dans ce répertoire, créer un fichier qui représente le plateau :
             // représentation des combinaisons par leur index d'énum  (1 -> Noir; 2-> Rouge; ...)
@@ -135,5 +132,6 @@ public class Save {
             // Enfin: Pour chaque essai vide => écrire un point + \n
 
             //TODO écrire les couleurs autorisees par leur index d'énum  (1 -> Noir; 2-> Rouge; ...)
+        }
     }
 }
