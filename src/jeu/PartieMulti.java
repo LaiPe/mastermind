@@ -147,7 +147,7 @@ public class PartieMulti implements Partie{
         updatePointsPartie(pointsTour);
 
         //Affichage fin de tour (scores)
-        gui.afficherScoresPartieMulti(false, pointsTour, pointsPartie);
+        gui.afficherScoresPartieMulti(pointsTour, pointsPartie);
         gui.getInputPause();
     }
 
@@ -160,7 +160,7 @@ public class PartieMulti implements Partie{
         }
 
         //Affichage Final de partie (podium)
-        gui.afficherScoresPartieMulti(true, null, pointsPartie); //TODO Signature à revoir (=> SURCHARGE: 2 signatures)
+        gui.afficherScoresPartieMulti(pointsPartie);
         gui.getInputPause();
 
     }
