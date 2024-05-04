@@ -125,13 +125,22 @@ public class Save {
             Path joueurDirectory = Paths.get(getSavePathName(), String.valueOf(i+1));
             Files.createDirectories(joueurDirectory);
 
+            List<Couleur> couleurAutorisees = liJoueurs.get(i).getCouleurAutorisees();
+            Path couleurs = Paths.get(joueurDirectory + "/couleurAutorisees.csv");
+            Files.createFile(couleurs);
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(couleurs.toString()))) {
+                writer.write(String.valueOf(couleurAutorisees.get(0).getIndex()));
+                for (int c = 1 ; c < couleurAutorisees.size() ; c++){
+                    writer.write("," + couleurAutorisees.get(c).getIndex());
+                }
+            }
+
             //TODO Dans ce répertoire, créer un fichier qui représente le plateau :
             // représentation des combinaisons par leur index d'énum  (1 -> Noir; 2-> Rouge; ...)
             // première ligne : combinason secrète + \n
             // Ensuite pour chaque essai: Combnaison essai ; Tentative result associé + \n
             // Enfin: Pour chaque essai vide => écrire un point + \n
 
-            //TODO écrire les couleurs autorisees par leur index d'énum  (1 -> Noir; 2-> Rouge; ...)
         }
     }
 }
