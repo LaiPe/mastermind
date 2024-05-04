@@ -121,7 +121,8 @@ public class PartieMulti implements Partie{
 
                         if (partieJoueur.finie()) { // Si le tour a abouti à la fin de la PartieSolo du joueur
                             partiesFinies.set(i, Boolean.TRUE);
-                            gui.afficherVictoirePartieMulti(i+1,listeCptEssais.get(i)); //TODO prévoir cas défaite (cf. affichage TODO pour PartieSolo)
+                            gui.afficherPlateau(partieJoueur.getPlateau());
+                            gui.afficherMessageFinPartie(partieJoueur.gagnee(),i+1,listeCptEssais.get(i));
                             gui.getInputPause();
                         }
                     }

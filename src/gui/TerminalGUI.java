@@ -79,9 +79,22 @@ public class TerminalGUI implements GUI {
         );
     }
     @Override
-    public void afficherVictoirePartieMulti(int indexJoueur, int cptEssais) {
-        System.out.println(Couleur.VERT + "Félicitation Joueur " + indexJoueur + ", vous avez deviné votre combinaison secrète en " + cptEssais + " essais !" + Couleur.RESET);
+    public void afficherMessageFinPartie(boolean victoire, int indexJoueur, int cptEssais) {
+        if (victoire){
+            System.out.println(Couleur.VERT + "Félicitations Joueur " + indexJoueur + ", vous avez deviné votre combinaison secrète en " + cptEssais + " essais !" + Couleur.RESET);
+        } else {
+            System.out.println(Couleur.ROUGE + "Dommage Joueur " + indexJoueur + ", vous avez utilisé tous vos essais sans trouver la combinaison secrète, vous avez perdu..." + Couleur.RESET);
+        }
     }
+    @Override
+    public void afficherMessageFinPartie(boolean victoire, int cptEssais) {
+        if (victoire){
+            System.out.println(Couleur.VERT + "Félicitations, vous avez deviné votre combinaison secrète en " + cptEssais + " essais !" + Couleur.RESET);
+        } else {
+            System.out.println(Couleur.ROUGE + "Dommage, vous avez utilisé tous vos essais sans trouver la combinaison secrète, vous avez perdu..." + Couleur.RESET);
+        }
+    }
+
     @Override
     public void afficherScoresPartieMulti(List<Integer> listePointsTour, List<Integer> listePointsPartie) {
         System.out.println("========= Tableau des scores =========");

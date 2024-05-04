@@ -20,7 +20,8 @@ public interface GUI {
     void afficherErreur(String message);
     void afficherPlateau(Plateau plateau);
     void afficherInfosPartieMulti(int indexPartie, int indexJoueur);
-    void afficherVictoirePartieMulti(int indexJoueur, int cptEssais);
+    void afficherMessageFinPartie(boolean victoire, int indexJoueur, int cptEssais);
+    void afficherMessageFinPartie(boolean victoire, int cptEssais);
 
     void afficherScoresPartieMulti(List<Integer> listePointsTour, List<Integer> listePointsPartie);
     void afficherScoresPartieMulti(List<Integer> listePointsPartie);

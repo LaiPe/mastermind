@@ -18,6 +18,8 @@ public class PartieSolo implements Partie {
     private Plateau plateau;
     List<Couleur> couleurAutorisees;
 
+    private int indexTourEnCours;
+
     GUI gui;
 
     public Plateau getPlateau() {
@@ -84,6 +86,8 @@ public class PartieSolo implements Partie {
         //Initialisation de la gui
         this.gui = gui;
 
+        indexTourEnCours = 0;
+
     }
     public PartieSolo(GUI gui, MapRule rules) {
         initPartieSolo(gui, rules);
@@ -119,7 +123,7 @@ public class PartieSolo implements Partie {
 
         Combinaison essai = null;
         while (!resValid) {
-
+            indexTourEnCours++;
             gui.afficherPlateau(plateau); //Affichage du plateau
             try {
                 essai = gui.choixCombinaison(plateau.getTailleMaxCombinaison(), couleurAutorisees, messageErr); //Création de la combinaison de l'essai du tour.
@@ -146,14 +150,7 @@ public class PartieSolo implements Partie {
 
         //Affichage Final
         gui.afficherPlateau(plateau);
-        if (gagnee()){
-            System.out.println("Bravo, vous avez gagné !");
-            //TODO gui affichage victoire
-        } else {
-            System.out.println("Dommage, vous avez perdu...");
-            //TODO gui affichage défaite
-
-        }
+        gui.afficherMessageFinPartie(gagnee(),indexTourEnCours);
         gui.getInputPause();
     }
 }
