@@ -147,7 +147,7 @@ public class Save {
         }
 
         if (typePartie.equals(PartieMulti.class.getSimpleName())){
-            //TODO écrire points.csv
+            //TODO STOCKER L'ETAT DE TourPartieMulti
         }
 
         for (int i = 0 ; i < liJoueurs.size() ; i++) {
@@ -170,26 +170,17 @@ public class Save {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(plateauFile.toString()))) {
 
                 CombinaisonSecrete cs = plateau.getCombinaisonSecrete();
-                StringBuilder sb = new StringBuilder();
-                for (int c = 0 ; c < cs.getTaille() ; c++){
-                    sb.append(cs.getElement(c).getCouleurPion().getIndex());
-                }
-                writer.write(sb.toString());
+                writer.write(cs.toIndexString());
                 writer.newLine();
 
 
                 for (int c = 0 ; c < plateau.getNbEssais() ; c++){
-                    StringBuilder sbEssais = new StringBuilder();
-                    Combinaison combinaison = plateau.getCombinaisonEssai(c);
-                    for (int d = 0 ; d < combinaison.getTaille() ; d++){
-                        sbEssais.append(combinaison.getElement(d).getCouleurPion().getIndex());
-                    }
-                    sbEssais.append(",");
-                    TentativeResult tresult = plateau.getResultEssai(c);
-                    for (int d = 0 ; d < tresult.getTaille() ; d++){
-                        sbEssais.append(tresult.getElement(d).getIndex());
-                    }
-                    writer.write(sbEssais.toString());
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(plateau.getCombinaisonEssai(c).toIndexString());
+                    sb.append(",");
+                    sb.append(plateau.getResultEssai(c).toIndexString());
+
+                    writer.write(sb.toString());
                     writer.newLine();
                 }
                 for (int c = plateau.getNbEssais() ; c < plateau.getNbEssaisMax() ; c++){
