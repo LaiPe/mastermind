@@ -63,9 +63,14 @@ public class PartieMulti implements Partie{
         private final List<PartieSolo> parties;
         private final List<Boolean> partiesFinies;
         private final List<Integer> pointsTour;
+        private int indexJoueurEnCours;
 
         public List<PartieSolo> getParties() {
             return parties;
+        }
+
+        public int getIndexJoueurEnCours() {
+            return indexJoueurEnCours;
         }
 
         public List<Boolean> getPartiesFinies() {
@@ -110,21 +115,21 @@ public class PartieMulti implements Partie{
 
             while (!tourFini()) { // Tant que toutes les parties solos qui composent le tour ne sont pas finies.
 
-                for (int i = 0; i < nbJoueurs; i++) { // Pour chaque joueur
-                    PartieSolo partieJoueur = parties.get(i);
+                for (indexJoueurEnCours = 0; indexJoueurEnCours < nbJoueurs; indexJoueurEnCours++) { // Pour chaque joueur
+                    PartieSolo partieJoueur = parties.get(indexJoueurEnCours);
 
-                    if (!partiesFinies.get(i)) { //Si le joueur i n'a pas fini sa partie
+                    if (!partiesFinies.get(indexJoueurEnCours)) { //Si le joueur i n'a pas fini sa partie
 
-                        listeCptEssais.set(i,listeCptEssais.get(i) + 1); //Incrémente compteur essai du joueur
+                        listeCptEssais.set(indexJoueurEnCours,listeCptEssais.get(indexJoueurEnCours) + 1); //Incrémente compteur essai du joueur
 
-                        gui.afficherInfosPartieMulti(indexTourEnCours, i+1); //Infos GUI
+                        gui.afficherInfosPartieMulti(indexTourEnCours, indexJoueurEnCours+1); //Infos GUI
 
                         partieJoueur.doTour(); //Faire le tour (au sens tour de PartieSolo) du joueur.
 
                         if (partieJoueur.finie()) { // Si le tour a abouti à la fin de la PartieSolo du joueur
-                            partiesFinies.set(i, Boolean.TRUE);
+                            partiesFinies.set(indexJoueurEnCours, Boolean.TRUE);
                             gui.afficherPlateau(partieJoueur.getPlateau());
-                            gui.afficherMessageFinPartie(partieJoueur.gagnee(),i+1,listeCptEssais.get(i));
+                            gui.afficherMessageFinPartie(partieJoueur.gagnee(),indexJoueurEnCours+1,listeCptEssais.get(indexJoueurEnCours));
                             gui.getInputPause();
                         }
                     }
@@ -143,7 +148,7 @@ public class PartieMulti implements Partie{
         try {
             tour.launch(); //Lancement du tour
         } catch (SaveSignal s){
-            Save save = new Save(this.getClass().getSimpleName(),indexTourEnCours, rules, pointsPartie);
+            Save save = new Save(this.getClass().getSimpleName(),indexTourEnCours, rules, pointsPartie, tour.getIndexJoueurEnCours());
             for (PartieSolo partie : tour.getParties()) {
                 save.addDataJoueur(partie.getPlateau(), partie.getCouleurAutorisees());
             }

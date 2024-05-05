@@ -31,7 +31,9 @@ public class Save {
     private String typePartie;
     private int indexTourEnCours;
     private MapRule rules;
+
     private List<Integer> liPoints;
+    private int indexJoueurEnCours;
 
     private List<DataJoueur> liJoueurs;
 
@@ -47,12 +49,13 @@ public class Save {
             throw new RuntimeException("Mauvais type de partie");
         }
     }
-    public Save(String typePartie, int indexTourEnCours, MapRule rules, List<Integer> liPoints){
+    public Save(String typePartie, int indexTourEnCours, MapRule rules, List<Integer> liPoints, int indexJoueurEnCours){
         if (typePartie.equals(PartieMulti.class.getSimpleName())) {
             this.typePartie = typePartie;
             this.indexTourEnCours = indexTourEnCours;
             this.rules = rules;
             this.liPoints = liPoints;
+            this.indexJoueurEnCours = indexJoueurEnCours;
 
             liJoueurs = new ArrayList<>();
         } else {
@@ -128,6 +131,10 @@ public class Save {
             writer.write(typePartie);
             writer.newLine();
             writer.write(String.valueOf(indexTourEnCours));
+            if (typePartie.equals(PartieMulti.class.getSimpleName())){
+                writer.newLine();
+                writer.write(String.valueOf(indexJoueurEnCours));
+            }
         }
 
         Path rules = Paths.get(getSavePathName() + "/rules.csv");
