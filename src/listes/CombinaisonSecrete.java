@@ -133,5 +133,19 @@ public class CombinaisonSecrete extends EntityList<Pion> {
         return Boolean.TRUE;
     }
 
+    public String toIndexString() {
+        StringBuilder result = new StringBuilder();
+
+        for (int i = 0 ; i < getTaille() ; i++){
+            result.append(getElement(i).getCouleurPion().getIndex());
+        }
+
+        for (int i = getTaille() ; i < getTailleMax() ; i++){
+            result.append(".");
+        }
+
+        return result.toString();
+    }
+
     //? SUPPRIMER LA METHODE GETELEMENT (dispensable mais est-ce possible avec un héritage ou alors passer par la délégation)
 }
