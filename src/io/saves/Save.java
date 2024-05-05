@@ -2,6 +2,7 @@ package io.saves;
 
 import entities.Couleur;
 import jeu.PartieMulti;
+import jeu.PartieSolo;
 import jeu.Plateau;
 import listes.Combinaison;
 import listes.CombinaisonSecrete;
@@ -30,16 +31,33 @@ public class Save {
     private String typePartie;
     private int indexTourEnCours;
     private MapRule rules;
+    private List<Integer> liPoints;
 
     private List<DataJoueur> liJoueurs;
 
 
     public Save(String typePartie, int indexTourEnCours, MapRule rules){
-        this.typePartie = typePartie;
-        this.indexTourEnCours = indexTourEnCours;
-        this.rules = rules;
+        if (typePartie.equals(PartieSolo.class.getSimpleName())) {
+            this.typePartie = typePartie;
+            this.indexTourEnCours = indexTourEnCours;
+            this.rules = rules;
 
-        liJoueurs = new ArrayList<>();
+            liJoueurs = new ArrayList<>();
+        } else {
+            throw new RuntimeException("Mauvais type de partie");
+        }
+    }
+    public Save(String typePartie, int indexTourEnCours, MapRule rules, List<Integer> liPoints){
+        if (typePartie.equals(PartieMulti.class.getSimpleName())) {
+            this.typePartie = typePartie;
+            this.indexTourEnCours = indexTourEnCours;
+            this.rules = rules;
+            this.liPoints = liPoints;
+
+            liJoueurs = new ArrayList<>();
+        } else {
+            throw new RuntimeException("Mauvais type de partie");
+        }
     }
 
     public String getSavePathName() {
@@ -66,6 +84,7 @@ public class Save {
     public void addDataJoueur(Plateau plateau, List<Couleur> couleurAutorisees){
         liJoueurs.add(new DataJoueur(plateau, couleurAutorisees));
     }
+
 
 
 
@@ -121,7 +140,7 @@ public class Save {
         }
 
         if (typePartie.equals(PartieMulti.class.getSimpleName())){
-            //TODO écrire points
+            //TODO écrire points.csv
         }
 
         for (int i = 0 ; i < liJoueurs.size() ; i++) {

@@ -1,10 +1,12 @@
 package jeu;
 
 import gui.GUI;
+import io.saves.Save;
 import io.saves.SaveSignal;
 import rules.*;
 import rules.map.MapRule;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -140,9 +142,21 @@ public class PartieMulti implements Partie{
         indexTourEnCours++;
         try {
             tour.launch(); //Lancement du tour
-        } catch (SaveSignal e){
-            //TODO Save état partie
-            throw e;
+        } catch (SaveSignal s){
+            Save save = new Save(this.getClass().getSimpleName(),indexTourEnCours, rules, pointsPartie);
+            for (PartieSolo partie : tour.getParties()) {
+                save.addDataJoueur(partie.getPlateau(), partie.getCouleurAutorisees());
+            }
+
+            try {
+                save.doSave();
+                System.out.println("Sauvegarde situé dans le répertoire \"" + save.getSavePathName() + "\".");
+            } catch (IOException e){
+                gui.afficherErreur("Erreur lors de la création de la sauvegarde : " + e.getMessage());
+            }
+
+            gui.getInputPause();
+            throw s;
         }
         //Mise à jour des points de la partie
         List<Integer> pointsTour = tour.getPointsTour();
@@ -160,7 +174,7 @@ public class PartieMulti implements Partie{
         while (indexTourEnCours < nbParties) {
             try {
                 doTour();
-            } catch (SaveSignal e){
+            } catch (SaveSignal s){
                 return;
             }
         }
