@@ -183,10 +183,11 @@ public class Save {
                         sbEssais.append(tresult.getElement(d).getIndex());
                     }
                     writer.write(sbEssais.toString());
+                    writer.newLine();
                 }
                 for (int c = plateau.getNbEssais() ; c < plateau.getNbEssaisMax() ; c++){
-                    writer.newLine();
                     writer.write(".");
+                    writer.newLine();
                 }
             }
         }
